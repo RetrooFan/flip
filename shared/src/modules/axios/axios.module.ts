@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
+import { ConsoleLogger, Module } from '@nestjs/common';
 import { AxiosService } from './axios.service';
 
 @Module({
-  providers: [AxiosService],
+  providers: [AxiosService, ConsoleLogger],
   exports: [AxiosService],
 })
 export class AxiosModule {}
