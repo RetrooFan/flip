@@ -17,6 +17,7 @@ services:
       - ./services/s0DataProvider/package.json:/app/package.json
       - ./services/s0DataProvider/.env:/app/.env:ro
       - ./tsconfig.json:/app/tsconfig.json:ro
+      - ./tsconfig.build.json:/app/tsconfig.build.json:ro
     environment:
       NODE_ENV: ${NODE_ENV}
       PORT: 80
@@ -40,6 +41,7 @@ services:
       - ./services/s1DataAnalyzer/package.json:/app/package.json
       - ./services/s1DataAnalyzer/.env:/app/.env:ro
       - ./tsconfig.json:/app/tsconfig.json:ro
+      - ./tsconfig.build.json:/app/tsconfig.build.json:ro
     environment:
       NODE_ENV: ${NODE_ENV}
       PORT: 80
@@ -66,6 +68,7 @@ services:
       - ./services/s2MetricsProvider/package.json:/app/package.json
       - ./services/s2MetricsProvider/.env:/app/.env:ro
       - ./tsconfig.json:/app/tsconfig.json:ro
+      - ./tsconfig.build.json:/app/tsconfig.build.json:ro
     environment:
       NODE_ENV: ${NODE_ENV}
       PORT: 80

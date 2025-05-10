@@ -21,9 +21,5 @@
     ".eslintrc.js",
     "services",
     "shared"
-  ],
-  "exclude": [
-    "shared/test",
-    "shared/src/modules" // remove for creating new imports
   ]
 }
