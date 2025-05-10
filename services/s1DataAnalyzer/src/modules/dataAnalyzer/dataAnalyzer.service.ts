@@ -7,12 +7,16 @@ import { S1DataAnalyzerUnknownError } from '../../errors/s1DataAnalyzer.error';
 export class DataAnalyzerService {
   private message = 'BLA';
 
-  constructor(cronService: CronService) {
-    cronService.addJob('DATA_ANALYZER_CRON_TIME', process.env.DATA_ANALYZER_CRON_TIME, () =>
+  constructor(private readonly cronService: CronService) {
+    this.addCronJobs();
+  }
+
+  private addCronJobs(): void {
+    this.cronService.addJob('DATA_ANALYZER_CRON_TIME', process.env.DATA_ANALYZER_CRON_TIME, () =>
       errorRethrower(this.dataAnalyzerCronCallback(), S1DataAnalyzerUnknownError),
     );
 
-    cronService.addJob('PRODUCT_YESTERDAY_COUNTER_TIME', process.env.PRODUCT_YESTERDAY_COUNTER_TIME, () =>
+    this.cronService.addJob('PRODUCT_YESTERDAY_COUNTER_TIME', process.env.PRODUCT_YESTERDAY_COUNTER_TIME, () =>
       errorRethrower(this.productYesterdayCounterCallback(), S1DataAnalyzerUnknownError),
     );
   }
