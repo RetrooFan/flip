@@ -23,9 +23,6 @@ export class FlipExceptionFilter implements ExceptionFilter {
       details: error.message,
     });
 
-    const message = [error.constructor.name, error.stack].join('\n');
-    this.consoleLogger.error(message, FlipExceptionFilter.name);
-
     logError(this.consoleLogger, error, FlipExceptionFilter.name);
   }
 }
