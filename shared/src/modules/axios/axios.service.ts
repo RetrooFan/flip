@@ -16,6 +16,8 @@ export class AxiosService {
 
   public async request<T = unknown>(options: AxiosRequestConfig): Promise<T> {
     try {
+      this.consoleLogger.log(options, AxiosService.name);
+
       return (await this.getAxios().request<T>(options)).data;
     } catch (error) {
       this.consoleLogger.error(error.constructor.name, AxiosService.name);
