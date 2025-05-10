@@ -24,7 +24,8 @@
     "jest:services": "jest services",
     "jest:shared": "jest shared",
     "jest:all": "jest",
-    "jest:all:debug": "node --inspect-brk=0.0.0.0 node_modules/.bin/jest --runInBand services"
+    "jest:all:debug": "node --inspect-brk=0.0.0.0 node_modules/.bin/jest --runInBand services",
+    "test": "./RUNME-test.sh"
   },
   "jest": {
     "preset": "ts-jest",
