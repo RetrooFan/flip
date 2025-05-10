@@ -14,8 +14,6 @@ export class DataFacilitatorController {
   ): Promise<Order[]> {
     const dataFacilitatorQueryDto: DataFacilitatorQueryDto = { _page, _limit };
 
-    const orders = await this.dataFacilitatorService.getOrders(dataFacilitatorQueryDto);
-
-    return orders;
+    return await this.dataFacilitatorService.getOrders(dataFacilitatorQueryDto);
   }
 }
