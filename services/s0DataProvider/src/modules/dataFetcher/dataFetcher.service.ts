@@ -59,7 +59,7 @@ export class DataFetcherService {
     const pagesNumber = endPage - startPage + 1;
     const itemsNumber = pagesNumber * limit;
     const orders: Order[] = [];
-    const initialMessage = `Loading pages ${startPage} - ${endPage} (${itemsNumber} items)`;
+    const initialMessage = `Loading pages ${startPage} - ${endPage} (${pagesNumber} pages - ${itemsNumber} items)`;
 
     this.consoleLogger.log(`${initialMessage} - 0 %`, this.serviceName);
     this.stopLoadingFlag = false;
@@ -80,7 +80,7 @@ export class DataFetcherService {
 
       orders.push(...data);
 
-      const message = `Loaded page ${i} (${limit} items)`;
+      const message = `Loaded page ${i} (${data.length} items)`;
       this.consoleLogger.log(
         `${message} - ${Math.round(((i - startPage + 1) * 100) / pagesNumber)} %`,
         this.serviceName,
