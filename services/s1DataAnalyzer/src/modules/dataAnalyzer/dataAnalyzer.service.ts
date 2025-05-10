@@ -37,8 +37,8 @@ export class DataAnalyzerService {
   }
 
   private async dataAnalyzerCronCallback(): Promise<void> {
-    const currentAmount = await this.amountOfOrdersModel.findOne();
-    const currentValue = currentAmount ? currentAmount.value : 0;
+    const amountOfOrders = await this.amountOfOrdersModel.findOne<AmountOfOrders>();
+    const currentValue = amountOfOrders ? amountOfOrders.value : 0;
 
     const limit = this.configService.get<number>('itemsNumberQueryLimit');
     const page = Math.trunc(currentValue / limit) + 1;

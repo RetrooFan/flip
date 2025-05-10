@@ -24,7 +24,7 @@ export class DataFacilitatorService {
     const skipItemsNumber = getOrdersQueryDto._limit * (getOrdersQueryDto._page - 1);
 
     return await this.orderModel
-      .find({ date: { $lte: this.date } })
+      .find<Order>({ date: { $lte: this.date } })
       .skip(skipItemsNumber)
       .limit(getOrdersQueryDto._limit)
       .sort({ date: 1 });

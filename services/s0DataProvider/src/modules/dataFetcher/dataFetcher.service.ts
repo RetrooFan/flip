@@ -45,7 +45,7 @@ export class DataFetcherService {
   }
 
   public async read(): Promise<Order[]> {
-    return await this.orderModel.find().skip(0).limit(10);
+    return await this.orderModel.find<Order>().skip(0).limit(10);
   }
 
   private async fetchData(startPage: number, endPage: number): Promise<Order[]> {
