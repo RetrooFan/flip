@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class HelloService {
-  private message = `Hello! It's ${process.env.npm_package_name}!`;
+  constructor(private readonly configService: ConfigService) {}
 
   public getHello(): string {
-    return this.message;
+    return `Hello! It's ${this.configService.get<string>('packageName')}!`;
   }
 }
