@@ -1,6 +1,6 @@
 import { ConsoleLogger, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { AxiosStatic } from 'axios';
+import { AxiosResponse, AxiosStatic } from 'axios';
 import { Response } from 'express';
 import { Model } from 'mongoose';
 import { DataFetcherQueryDto } from '../../../../../shared/src/dtos/dataFetcherParams.dto';
@@ -39,12 +39,17 @@ export class DataFetcherService {
     for (let i = startPage; i < endPage + 1; i++) {
       const params = { _page: i, _limit: limit };
 
-      const result = await this.axiosInstance.get('orders', {
-        params,
-        baseURL: process.env.DATA_SOURCE_API,
-      });
+      let data: Order[];
 
-      orders.push(...result.data);
+      try {
+        const baseURL = process.env.DATA_SOURCE_API;
+        ({ data } = await this.axiosInstance.get('orders', { params, baseURL }));
+      } catch (error) {
+        data = [];
+        this.consoleLogger.error(error, 'DataFetcherService');
+      }
+
+      orders.push(...data);
 
       this.consoleLogger.log(
         `${message} - ${Math.round(((i - startPage + 1) * 100) / pagesNumber)} %`,
