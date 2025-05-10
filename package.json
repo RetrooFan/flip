@@ -19,5 +19,8 @@
     "eslint-config-airbnb-base-ts": "^14.1.2",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^9.0.0"
   }
 }
