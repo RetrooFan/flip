@@ -9,5 +9,6 @@ export default (): ConfigObject => {
     mongoDbUriFlip: process.env.MONGODB_URI_FLIP.replace('?????', process.env.NODE_ENV),
     productYesterdayCounterTime: process.env.PRODUCT_YESTERDAY_COUNTER_TIME,
     redisUrl: process.env.REDIS_URL.replace('?????', process.env.NODE_ENV),
+    dataSourceApi: process.env.DATA_SOURCE_API.replace('?????', process.env.NODE_ENV),
   };
 };
