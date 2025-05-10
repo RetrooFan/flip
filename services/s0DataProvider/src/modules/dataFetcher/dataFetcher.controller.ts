@@ -17,4 +17,9 @@ export class DataFetcherController {
 
     await this.dataFetcherService.loadData(response, dataFetcherQueryDto);
   }
+
+  @Get('stop')
+  private stopLoading(): string {
+    return this.dataFetcherService.stopLoading();
+  }
 }

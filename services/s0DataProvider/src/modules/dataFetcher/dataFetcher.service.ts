@@ -11,6 +11,7 @@ import { AxiosService } from '../../../../../shared/src/modules/axios/axios.serv
 @Injectable()
 export class DataFetcherService {
   private readonly axiosInstance: AxiosStatic;
+  private stopLoadingFlag: boolean;
 
   constructor(
     axiosService: AxiosService,
@@ -29,6 +30,12 @@ export class DataFetcherService {
     await this.saveData(orders);
   }
 
+  public stopLoading(): string {
+    this.stopLoadingFlag = true;
+
+    return 'Data loading stopped!';
+  }
+
   private async fetchData(startPage: number, endPage: number): Promise<Order[]> {
     const limit = parseInt(process.env.ITEMS_NUMBER_QUERY_LIMIT);
     const pagesNumber = endPage - startPage + 1;
@@ -37,8 +44,14 @@ export class DataFetcherService {
     const initialMessage = `Loading pages ${startPage} - ${endPage} (${itemsNumber} items)`;
 
     this.consoleLogger.log(`${initialMessage} - 0 %`, 'DataFetcherService');
+    this.stopLoadingFlag = false;
 
     for (let i = startPage; i < endPage + 1; i++) {
+      if (this.stopLoadingFlag) {
+        this.stopLoadingFlag = false;
+        break;
+      }
+
       const params = { _page: i, _limit: limit };
 
       let data: Order[];
