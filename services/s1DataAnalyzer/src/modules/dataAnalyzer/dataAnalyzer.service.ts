@@ -19,7 +19,7 @@ export class DataAnalyzerService {
     private readonly cronService: CronService,
     axiosService: AxiosService,
     @InjectModel(LastOrder.name, DbConnection.DataAnalyzer)
-    private readonly orderModel: Model<LastOrderDocument>,
+    private readonly lastOrderModel: Model<LastOrderDocument>,
     private readonly configService: ConfigService,
   ) {
     this.axiosInstance = axiosService.getAxios();
