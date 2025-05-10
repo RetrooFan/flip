@@ -13,6 +13,7 @@ import { S1DataAnalyzerUnknownError } from '../../errors/s1DataAnalyzer.error';
 @Injectable()
 export class DataAnalyzerService {
   private message = 'BLA';
+  private analysisRunning = false;
 
   constructor(
     private readonly cronService: CronService,
@@ -37,6 +38,8 @@ export class DataAnalyzerService {
   }
 
   private async dataAnalyzerCronCallback(): Promise<void> {
+    if (this.analysisRunning) return;
+    this.analysisRunning = true;
     const amountOfOrders = await this.amountOfOrdersModel.findOne<AmountOfOrders>();
     const currentValue = amountOfOrders ? amountOfOrders.value : 0;
 
@@ -56,6 +59,8 @@ export class DataAnalyzerService {
     if (value > currentValue && data.length) {
       await new this.amountOfOrdersModel({ value }).save();
     }
+
+    this.analysisRunning = false;
   }
 
   private async productYesterdayCounterCallback(): Promise<void> {
