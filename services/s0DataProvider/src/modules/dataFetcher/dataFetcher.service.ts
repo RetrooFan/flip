@@ -60,9 +60,9 @@ export class DataFetcherService {
     this.abortLoadingFlag = false;
 
     for (let i = startPage; i < endPage + 1; i++) {
-      const params = { _page: i, _limit: limit };
       const baseURL = this.configService.get<string>('dataSourceApi');
       const url = 'orders';
+      const params = { _page: i, _limit: limit };
       let data: Order[] = [];
 
       try {
