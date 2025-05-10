@@ -17,12 +17,16 @@ export class FlipExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
 
+    logError(this.consoleLogger, error, FlipExceptionFilter.name);
+
+    if (response.headersSent) {
+      return;
+    }
+
     response.status(500).json({
       statusCode: 500,
       message: 'Internal server error',
       details: error.message,
     });
-
-    logError(this.consoleLogger, error, FlipExceptionFilter.name);
   }
 }
