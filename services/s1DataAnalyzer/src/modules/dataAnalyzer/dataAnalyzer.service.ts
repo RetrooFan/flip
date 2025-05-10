@@ -33,12 +33,6 @@ export class DataAnalyzerService {
     this.cronService.addJob('DATA_ANALYZER_CRON_TIME', this.configService.get<string>('dataAnalyzerCronTime'), () =>
       errorRethrower(this.dataAnalyzerCronCallback(), S1DataAnalyzerUnknownError),
     );
-
-    this.cronService.addJob(
-      'PRODUCT_YESTERDAY_COUNTER_TIME',
-      this.configService.get<string>('productYesterdayCounterTime'),
-      () => errorRethrower(this.productYesterdayCounterCallback(), S1DataAnalyzerUnknownError),
-    );
   }
 
   private async dataAnalyzerCronCallback(): Promise<void> {
