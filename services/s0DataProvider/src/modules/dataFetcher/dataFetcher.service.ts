@@ -43,6 +43,10 @@ export class DataFetcherService {
     return 'Data loading aborted!';
   }
 
+  public read(): string {
+    return 'Read!';
+  }
+
   private async fetchData(startPage: number, endPage: number): Promise<Order[]> {
     const limit = parseInt(process.env.ITEMS_NUMBER_QUERY_LIMIT);
     const pagesNumber = endPage - startPage + 1;

@@ -27,4 +27,9 @@ export class DataFetcherController {
   private abortLoading(): string {
     return this.dataFetcherService.abortLoading();
   }
+
+  @Get('read')
+  private read(): string {
+    return this.dataFetcherService.read();
+  }
 }
