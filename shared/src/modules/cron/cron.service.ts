@@ -5,7 +5,11 @@ import { logError } from '../../utils';
 
 @Injectable()
 export class CronService {
-  constructor(private readonly schedulerRegistry: SchedulerRegistry, private readonly consoleLogger: ConsoleLogger) {}
+  private readonly countersMap: Map<string, number>;
+
+  constructor(private readonly schedulerRegistry: SchedulerRegistry, private readonly consoleLogger: ConsoleLogger) {
+    this.countersMap = new Map();
+  }
 
   addJob(name: string, cronTime: string, callback: () => Promise<void>): void {
     const messageAdd = `Cron job ${name} added with [${cronTime}]`;
@@ -13,8 +17,10 @@ export class CronService {
     const messageExecuteFinished = `Cron job ${name} execution finished`;
 
     const callbackHandled = async (): Promise<void> => {
+      const counter = this.countersMap.get(name);
+      this.countersMap.set(name, counter + 1);
       const startTime = Date.now();
-      this.consoleLogger.log(messageExecuteStarted, CronService.name);
+      this.consoleLogger.log(`${messageExecuteStarted}: ${counter}`, CronService.name);
 
       try {
         await callback();
@@ -26,6 +32,7 @@ export class CronService {
       this.consoleLogger.log(`${messageExecuteFinished} in ${duration} ms\n`, CronService.name);
     };
 
+    this.countersMap.set(name, 0);
     const job = new CronJob(cronTime, callbackHandled);
     this.schedulerRegistry.addCronJob(name, job);
     job.start();
