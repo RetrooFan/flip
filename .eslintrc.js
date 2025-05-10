@@ -14,9 +14,9 @@ module.exports = {
   },
   ignorePatterns: ['.eslintrc.js'],
   rules: {
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'error',
+    '@typescript-eslint/explicit-module-boundary-types': 'error',
+    '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/naming-convention': [
       'error',
       {
@@ -28,8 +28,8 @@ module.exports = {
         }
       }
     ],
-    'import/prefer-default-export': 'off',
-    'max-classes-per-file': 'off',
-    'class-methods-use-this': 'off',
+    'import/prefer-default-export': 'error',
+    'max-classes-per-file': 'error',
+    'class-methods-use-this': 'error',
   },
 };
