@@ -66,7 +66,7 @@ export class DataAnalyzerService {
       const value = date.toISOString().split('T')[0];
 
       if (!dateOfOrderCounts) {
-        new this.dateOfOrderCountsModel({ value }).save();
+        await new this.dateOfOrderCountsModel({ value }).save();
       } else if (dateOfOrderCounts.value !== value) {
         await this.orderCountReset(value);
         new this.dateOfOrderCountsModel({ value }).save();
@@ -90,7 +90,7 @@ export class DataAnalyzerService {
           };
         }
 
-        new this.metricsOfProductModel(metricsOfProduct).save();
+        await new this.metricsOfProductModel(metricsOfProduct).save();
       }
     }
 
