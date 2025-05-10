@@ -23,6 +23,7 @@
     "shared"
   ],
   "exclude": [
-    "shared/test"
+    "shared/test",
+    "shared/src/modules" // remove for creating new imports
   ]
 }
