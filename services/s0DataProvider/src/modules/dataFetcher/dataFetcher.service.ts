@@ -109,7 +109,7 @@ export class DataFetcherService {
         fulfilledCounter++;
       } catch (error) {
         rejectedCounter++;
-        this.consoleLogger.error(error, 'DataFetcherService');
+        // this.consoleLogger.error(error, 'DataFetcherService');
       }
     }
 
