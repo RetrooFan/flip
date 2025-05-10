@@ -66,7 +66,7 @@ export class DataFetcherService {
       let data: Order[] = [];
 
       try {
-        data = await this.axiosService.request({ url, params, baseURL });
+        data = await this.axiosService.request<Order[]>({ url, params, baseURL });
       } catch (error) {
         this.consoleLogger.error(error, DataFetcherService.name);
       }
