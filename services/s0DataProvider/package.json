@@ -1,0 +1,12 @@
+{
+  "name": "s0-data-provider",
+  "main": "dist/services/s0DataProvider/src/index.js",
+  "scripts": {
+    "build:clean": "rimraf dist",
+    "prebuild": "npm run build:clean",
+    "build": "tsc",
+    "preprod": "npm run build",
+    "prod": "node .",
+    "dev": "nodemon"
+  }
+}
