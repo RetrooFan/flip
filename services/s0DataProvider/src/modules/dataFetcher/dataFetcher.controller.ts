@@ -22,4 +22,9 @@ export class DataFetcherController {
   private stopLoading(): string {
     return this.dataFetcherService.stopLoading();
   }
+
+  @Get('abort')
+  private abortLoading(): string {
+    return this.dataFetcherService.abortLoading();
+  }
 }

@@ -12,6 +12,7 @@ import { AxiosService } from '../../../../../shared/src/modules/axios/axios.serv
 export class DataFetcherService {
   private readonly axiosInstance: AxiosStatic;
   private stopLoadingFlag: boolean;
+  private abortLoadingFlag: boolean;
 
   constructor(
     axiosService: AxiosService,
@@ -36,6 +37,12 @@ export class DataFetcherService {
     return 'Data loading stopped!';
   }
 
+  public abortLoading(): string {
+    this.abortLoadingFlag = true;
+
+    return 'Data loading aborted!';
+  }
+
   private async fetchData(startPage: number, endPage: number): Promise<Order[]> {
     const limit = parseInt(process.env.ITEMS_NUMBER_QUERY_LIMIT);
     const pagesNumber = endPage - startPage + 1;
@@ -45,11 +52,17 @@ export class DataFetcherService {
 
     this.consoleLogger.log(`${initialMessage} - 0 %`, 'DataFetcherService');
     this.stopLoadingFlag = false;
+    this.abortLoadingFlag = false;
 
     for (let i = startPage; i < endPage + 1; i++) {
       if (this.stopLoadingFlag) {
         this.stopLoadingFlag = false;
         break;
+      }
+
+      if (this.abortLoadingFlag) {
+        this.abortLoadingFlag = false;
+        return [];
       }
 
       const params = { _page: i, _limit: limit };
