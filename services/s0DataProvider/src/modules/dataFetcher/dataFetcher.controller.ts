@@ -22,13 +22,13 @@ export class DataFetcherController {
   }
 
   @Get('stop')
-  private stopLoading(): string {
-    return this.dataFetcherService.stopLoading();
+  private async stopLoading(): Promise<string> {
+    return await this.dataFetcherService.stopLoading();
   }
 
   @Get('abort')
-  private abortLoading(): string {
-    return this.dataFetcherService.abortLoading();
+  private async abortLoading(): Promise<string> {
+    return await this.dataFetcherService.abortLoading();
   }
 
   @Get('read')

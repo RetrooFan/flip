@@ -30,7 +30,7 @@ export class DataFetcherService {
     await this.saveData(orders);
   }
 
-  public stopLoading(): string {
+  public async stopLoading(): Promise<string> {
     this.stopLoadingFlag = true;
     const message = 'Data loading stopped!';
 
@@ -39,7 +39,7 @@ export class DataFetcherService {
     return message;
   }
 
-  public abortLoading(): string {
+  public async abortLoading(): Promise<string> {
     this.abortLoadingFlag = true;
     const message = 'Data loading aborted!';
 
