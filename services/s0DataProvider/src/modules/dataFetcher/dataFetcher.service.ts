@@ -1,14 +1,22 @@
 import { ConsoleLogger, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 import { AxiosStatic } from 'axios';
 import { Response } from 'express';
-import { Order } from '../../../../../shared/src/entities/order.entity';
+import { Model } from 'mongoose';
+import { Order, OrderDocument } from '../../../../../shared/src/entities/order.entity';
+import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
 import { AxiosService } from '../../../../../shared/src/modules/axios/axios.service';
 
 @Injectable()
 export class DataFetcherService {
   private readonly axiosInstance: AxiosStatic;
 
-  constructor(axiosService: AxiosService, private readonly consoleLogger: ConsoleLogger) {
+  constructor(
+    axiosService: AxiosService,
+    private readonly consoleLogger: ConsoleLogger,
+    @InjectModel(Order.name, DbConnection.DataFetcher)
+    private readonly orderModel: Model<OrderDocument>,
+  ) {
     this.axiosInstance = axiosService.getAxios();
   }
 

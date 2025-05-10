@@ -3,7 +3,6 @@ import { Document } from 'mongoose';
 import { Customer } from '../types/customer.type';
 import { Item } from '../types/item.type';
 
-export const orderToken = 'order';
 export type OrderDocument = Order & Document;
 
 @Schema()
