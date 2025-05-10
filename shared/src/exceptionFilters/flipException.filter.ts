@@ -2,6 +2,7 @@ import { ExceptionFilter, Catch, ArgumentsHost, ConsoleLogger, INestApplication 
 import { Response } from 'express';
 import { FlipError } from '../errors/flip.error';
 import { FlipUnknownError } from '../errors/flipUnknown.error';
+import { logError } from '../utils';
 
 @Catch(FlipError, FlipUnknownError)
 export class FlipExceptionFilter implements ExceptionFilter {
@@ -24,5 +25,7 @@ export class FlipExceptionFilter implements ExceptionFilter {
 
     const message = [error.constructor.name, error.stack].join('\n');
     this.consoleLogger.error(message, FlipExceptionFilter.name);
+
+    logError(this.consoleLogger, error, FlipExceptionFilter.name);
   }
 }

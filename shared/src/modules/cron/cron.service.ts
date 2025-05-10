@@ -1,6 +1,7 @@
 import { ConsoleLogger, Injectable } from '@nestjs/common';
 import { SchedulerRegistry } from '@nestjs/schedule';
 import { CronJob } from 'cron';
+import { logError } from '../../utils';
 
 @Injectable()
 export class CronService {
@@ -17,8 +18,7 @@ export class CronService {
       try {
         await callback();
       } catch (error) {
-        const message = [error.constructor.name, error.stack].join('\n');
-        this.consoleLogger.error(message, CronService.name);
+        logError(this.consoleLogger, error, CronService.name);
       }
 
       this.consoleLogger.log(messageExecuteFinished, CronService.name);
