@@ -97,7 +97,7 @@ export class DataFetcherService {
     let rejectedCounter = 0;
     let fulfilledCounter = 0;
 
-    this.consoleLogger.error(`Saving records started: ${orders.length}`, DataFetcherService.name);
+    this.consoleLogger.log(`Saving records started: ${orders.length}`, DataFetcherService.name);
 
     for (let i = 0; i < orders.length; i++) {
       try {
