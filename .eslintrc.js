@@ -28,7 +28,7 @@ module.exports = {
         }
       }
     ],
-    'max-classes-per-file': 'error',
+    'max-classes-per-file': 'off',
     'class-methods-use-this': 'error',
   },
 };
