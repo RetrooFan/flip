@@ -29,8 +29,6 @@ describe('HelloService', () => {
 
   describe('getHello', () => {
     it('should return proper message', () => {
-      console.log('HelloService.getHello test', process.env.npm_package_name);
-
       expect(helloService.getHello()).toBe(`Hello! It's packageName!`);
     });
   });
