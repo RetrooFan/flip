@@ -33,14 +33,20 @@ export class DataFetcherService {
 
   public stopLoading(): string {
     this.stopLoadingFlag = true;
+    const message = 'Data loading stopped!';
 
-    return 'Data loading stopped!';
+    this.consoleLogger.warn(message, 'DataFetcherService');
+
+    return message;
   }
 
   public abortLoading(): string {
     this.abortLoadingFlag = true;
+    const message = 'Data loading aborted!';
 
-    return 'Data loading aborted!';
+    this.consoleLogger.warn(message, 'DataFetcherService');
+
+    return message;
   }
 
   public read(): string {
