@@ -91,8 +91,13 @@ export class DataAnalyzerService {
   }
 
   private async orderCountReset(): Promise<void> {
-    this.consoleLogger.log('DataAnalyzerService.orderCountReset START', DataAnalyzerService.name);
+    const metricsOfProducts = await this.metricsOfProductModel.find<MetricsOfProduct>();
 
-    this.consoleLogger.log('DataAnalyzerService.orderCountReset FINISH', DataAnalyzerService.name);
+    for (const metricsOfProduct of metricsOfProducts) {
+      metricsOfProduct.orderCountYesterday = metricsOfProduct.orderCountToday;
+      metricsOfProduct.orderCountToday = 0;
+
+      await new this.metricsOfProductModel(metricsOfProduct).save();
+    }
   }
 }
