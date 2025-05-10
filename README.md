@@ -36,7 +36,7 @@ This service uses only `flipS1DataAnalyzer` MongoDB database, so the same one as
 ## How to run it
 
 1. Just simply run file `RUNME-dev.sh` for development environment, or if you want, `RUNME-prod.sh` for production environment.</br>
-3 containers mentioned above will rise up.</br>
+3 containers mentioned above and a MongoDB container will rise up.</br>
 
 2. To start analyzing data, firstly you need to load all data from DataSource API:
 
