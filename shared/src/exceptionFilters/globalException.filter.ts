@@ -22,7 +22,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       details: error.message,
     });
 
-    this.consoleLogger.error(error.message, GlobalExceptionFilter.name);
-    this.consoleLogger.error(error.stack, GlobalExceptionFilter.name);
+    const message = [error.constructor.name, error.stack].join('\n');
+    this.consoleLogger.error(message, GlobalExceptionFilter.name);
   }
 }
