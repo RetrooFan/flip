@@ -1,6 +1,5 @@
 import { ConsoleLogger, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { AxiosStatic } from 'axios';
 import { Model } from 'mongoose';
 import { LoadDataQueryDto } from './dtos/dataFetcherQuery.dto';
 import { Order, OrderDocument } from '../../../../../shared/src/entities/order.entity';
@@ -10,7 +9,6 @@ import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class DataFetcherService {
-  private readonly axiosInstance: AxiosStatic;
   private stopLoadingFlag: boolean;
   private abortLoadingFlag: boolean;
 
@@ -20,9 +18,7 @@ export class DataFetcherService {
     @InjectModel(Order.name, DbConnection.DataFetcher)
     private readonly orderModel: Model<OrderDocument>,
     private readonly configService: ConfigService,
-  ) {
-    this.axiosInstance = axiosService.getAxios();
-  }
+  ) {}
 
   public async loadData(loadDataQueryDto: LoadDataQueryDto): Promise<void> {
     const orders = await this.fetchData(loadDataQueryDto.startPage, loadDataQueryDto.endPage);
