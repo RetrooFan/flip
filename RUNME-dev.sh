@@ -4,5 +4,5 @@ S0_DATA_PROVIDER_PORT=3000 \
 S0_DATA_PROVIDER_PORT_DEBUGGER=4000 \
 S2_METRICS_PROVIDER_PORT=3002 \
 S2_METRICS_PROVIDER_PORT_DEBUGGER=4002 \
-docker-compose up -V
+docker-compose up --renew-anon-volumes
 #docker-compose down
