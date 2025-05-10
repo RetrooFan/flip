@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MetricsOfProduct, MetricsOfProductSchema } from '../../../../../shared/src/entities/metricsOfProduct.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
-import { MetricsProviderController } from './dataFacilitator.controller';
+import { MetricsProviderController } from './metricsProvider.controller';
 import { MetricsProviderService } from './metricsProvider.service';
 
 @Module({
