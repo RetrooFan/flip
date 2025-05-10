@@ -1,7 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { DateOfVisibleOrders, dateOfVisibleOrdersSchema } from '../../../../../shared/src/entities/dateEntity.entity';
+import {
+  DateOfVisibleOrders,
+  dateOfVisibleOrdersSchema,
+} from '../../../../../shared/src/entities/dateOfVisibleOrders.entity';
 import { Order, orderSchema } from '../../../../../shared/src/entities/order.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
 import { DataFacilitatorController } from './dataFacilitator.controller';

@@ -4,7 +4,10 @@ import { Model } from 'mongoose';
 import { GetOrdersQueryDto } from './dtos/getOrdersQueryDto';
 import { Order, OrderDocument } from '../../../../../shared/src/entities/order.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
-import { DateOfVisibleOrders, DateOfVisibleOrdersDocument } from '../../../../../shared/src/entities/dateEntity.entity';
+import {
+  DateOfVisibleOrders,
+  DateOfVisibleOrdersDocument,
+} from '../../../../../shared/src/entities/dateOfVisibleOrders.entity';
 
 @Injectable()
 export class DataFacilitatorService {
