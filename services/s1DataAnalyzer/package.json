@@ -1,0 +1,29 @@
+{
+  "name": "s1-data-analyzer",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "main": "dist/services/s1-data-analyzer/src/main.js",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "tsc",
+    "preprod": "npm run build",
+    "prod": "node .",
+    "dev": "nodemon"
+  },
+  "dependencies": {
+    "@nestjs/common": "^9.0.0",
+    "@nestjs/core": "^9.0.0",
+    "@nestjs/platform-express": "^9.0.0",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "rxjs": "^7.2.0",
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19",
+    "ts-node": "^10.9.1"
+  }
+}
