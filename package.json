@@ -24,6 +24,12 @@
     "jest:services": "jest services",
     "jest:shared": "jest shared",
     "jest:all": "jest",
+    "jest:s0DataProvider:e2e": "jest services/s0DataProvider --config ./shared/test/jest-e2e.json",
+    "jest:s1DataAnalyzer:e2e": "jest services/s1DataAnalyzer --config ./shared/test/jest-e2e.json",
+    "jest:s2MetricsProvider:e2e": "jest services/s2MetricsProvider --config ./shared/test/jest-e2e.json",
+    "jest:services:e2e": "jest services --config ./shared/test/jest-e2e.json",
+    "jest:shared:e2e": "jest shared --config ./shared/test/jest-e2e.json",
+    "jest:all:e2e": "jest --config ./shared/test/jest-e2e.json",
     "jest:all:debug": "node --inspect-brk=0.0.0.0 node_modules/.bin/jest --runInBand services",
     "test": "./RUNME-test.sh"
   },
