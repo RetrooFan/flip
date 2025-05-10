@@ -8,7 +8,10 @@ import {
 } from '../../../../../shared/src/entities/amountOfAnalyzedOrders.entity';
 import { MetricsOfProduct, MetricsOfProductDocument } from '../../../../../shared/src/entities/metricsOfProduct.entity';
 import { Order } from '../../../../../shared/src/entities/order.entity';
-import { DateOfOrderCounts, DateOfOrderCountsDocument } from '../../../../../shared/src/entities/orderCountDate.entity';
+import {
+  DateOfOrderCounts,
+  DateOfOrderCountsDocument,
+} from '../../../../../shared/src/entities/dateOfOrderCounts.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
 import { AxiosService } from '../../../../../shared/src/modules/axios/axios.service';
 import { CronService } from '../../../../../shared/src/modules/cron/cron.service';

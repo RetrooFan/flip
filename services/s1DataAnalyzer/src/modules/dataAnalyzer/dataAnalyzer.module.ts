@@ -6,7 +6,10 @@ import {
   amountOfAnalyzedOrdersSchema,
 } from '../../../../../shared/src/entities/amountOfAnalyzedOrders.entity';
 import { MetricsOfProduct, MetricsOfProductSchema } from '../../../../../shared/src/entities/metricsOfProduct.entity';
-import { DateOfOrderCounts, dateOfOrderCountsSchema } from '../../../../../shared/src/entities/orderCountDate.entity';
+import {
+  DateOfOrderCounts,
+  dateOfOrderCountsSchema,
+} from '../../../../../shared/src/entities/dateOfOrderCounts.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
 import { AxiosModule } from '../../../../../shared/src/modules/axios/axios.module';
 import { CronModule } from '../../../../../shared/src/modules/cron/cron.module';
