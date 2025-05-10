@@ -13,6 +13,7 @@ import { DataFetcherService } from './dataFetcher.service';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
         const uri = configService.get<string>('mongoDbUriFlip');
+
         return { uri };
       },
       connectionName: DbConnection.DataFetcher,

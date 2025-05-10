@@ -16,6 +16,7 @@ import { DataFacilitatorService } from './dataFacilitator.service';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
         const uri = configService.get<string>('mongoDbUriFlip');
+
         return { uri };
       },
       connectionName: DbConnection.DataFacilitator,

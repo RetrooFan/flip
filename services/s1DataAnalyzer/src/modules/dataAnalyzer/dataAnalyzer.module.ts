@@ -21,6 +21,7 @@ import { DataAnalyzerService } from './dataAnalyzer.service';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
         const uri = configService.get<string>('mongoDbUriFlip');
+
         return { uri };
       },
       connectionName: DbConnection.DataAnalyzer,
