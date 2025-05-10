@@ -7,6 +7,9 @@ export type OrderDocument = Order & Document;
 
 @Schema()
 export class Order {
+  @Prop({ required: true, alias: 'id' })
+  _id: string;
+
   @Prop({ required: true, index: 1 })
   date: Date;
 
