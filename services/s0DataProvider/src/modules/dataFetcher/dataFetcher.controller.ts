@@ -1,6 +1,6 @@
 import { Controller, Get, HttpStatus, ParseIntPipe, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
-import { DataFetcherQueryDto } from './dtos/dataFetcherQuery.dto';
+import { LoadDataQueryDto } from './dtos/dataFetcherQuery.dto';
 import { Order } from '../../../../../shared/src/entities/order.entity';
 import { DataFetcherService } from './dataFetcher.service';
 import { S0DataProviderUnknownError } from '../../errors/s0DataProvider.error';
@@ -16,11 +16,11 @@ export class DataFetcherController {
     @Query('startPage', ParseIntPipe) startPage: number,
     @Query('endPage', ParseIntPipe) endPage: number,
   ): Promise<void> {
-    const dataFetcherQueryDto: DataFetcherQueryDto = { startPage, endPage };
+    const loadDataQueryDto: LoadDataQueryDto = { startPage, endPage };
 
     response.status(HttpStatus.OK).send('Data loading started!');
 
-    await errorRethrower(this.dataFetcherService.loadData(dataFetcherQueryDto), S0DataProviderUnknownError);
+    await errorRethrower(this.dataFetcherService.loadData(loadDataQueryDto), S0DataProviderUnknownError);
   }
 
   @Get('stop')

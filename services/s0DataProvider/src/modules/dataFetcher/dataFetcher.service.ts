@@ -2,7 +2,7 @@ import { ConsoleLogger, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { AxiosStatic } from 'axios';
 import { Model } from 'mongoose';
-import { DataFetcherQueryDto } from './dtos/dataFetcherQuery.dto';
+import { LoadDataQueryDto } from './dtos/dataFetcherQuery.dto';
 import { Order, OrderDocument } from '../../../../../shared/src/entities/order.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
 import { AxiosService } from '../../../../../shared/src/modules/axios/axios.service';
@@ -22,8 +22,8 @@ export class DataFetcherService {
     this.axiosInstance = axiosService.getAxios();
   }
 
-  public async loadData(dataFetcherQueryDto: DataFetcherQueryDto): Promise<void> {
-    const orders = await this.fetchData(dataFetcherQueryDto.startPage, dataFetcherQueryDto.endPage);
+  public async loadData(loadDataQueryDto: LoadDataQueryDto): Promise<void> {
+    const orders = await this.fetchData(loadDataQueryDto.startPage, loadDataQueryDto.endPage);
 
     await this.saveData(orders);
   }
