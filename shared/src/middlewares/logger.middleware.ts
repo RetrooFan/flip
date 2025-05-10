@@ -11,7 +11,7 @@ export function loggerMiddleware(req: Request, res: Response, next: NextFunction
     ip: req.ip,
   };
 
-  console.log('Request', counter++, request);
+  console.log('Incoming request', counter++, request);
   console.log();
 
   next();
