@@ -8,7 +8,7 @@
   "main": "dist/services/s1DataAnalyzer/src/main.js",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "tsc",
+    "build": "tsc --project tsconfig.build.json",
     "preprod": "npm run build",
     "prod": "node .",
     "dev": "nodemon"
