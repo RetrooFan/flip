@@ -1,6 +1,6 @@
 import { Controller, Get, ParseIntPipe, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
-import { DataFetcherQueryDto } from '../../../../../shared/src/dtos/dataFetcherParams.dto';
+import { DataFetcherQueryDto } from '../../../../../shared/src/dtos/dataFetcherQuery.dto';
 import { DataFetcherService } from './dataFetcher.service';
 
 @Controller()
