@@ -1,1 +1,3 @@
-export class FlipUnknownError extends Error {}
+import { FlipError } from './flip.error';
+
+export class FlipUnknownError extends FlipError {}

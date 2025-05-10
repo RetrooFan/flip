@@ -1,1 +1,3 @@
-export class FlipError extends Error {}
+export class FlipError extends Error {
+  original: Error;
+}
