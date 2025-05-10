@@ -8,19 +8,19 @@ export class MetricsOfProduct {
   @Prop({ required: true, alias: 'id' })
   _id: string;
 
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true })
   name: string;
 
-  @Prop({ required: true })
+  @Prop({ required: true, index: -1 })
   salesValue: number;
 
-  @Prop({ required: true })
+  @Prop({ required: true, index: -1 })
   orderCountTotal: number;
 
   @Prop({ required: true })
   orderCountToday: number;
 
-  @Prop({ required: true })
+  @Prop({ required: true, index: -1 })
   orderCountYesterday: number;
 }
 
