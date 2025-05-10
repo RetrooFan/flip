@@ -10,7 +10,7 @@ export class CronService {
   addJob(name: string, cronTime: string, callback: () => Promise<void>): void {
     const messageAdd = `Cron job ${name} added with [${cronTime}]`;
     const messageExecuteStarted = `Cron job ${name} execution started`;
-    const messageExecuteFinished = `Cron job ${name} execution finished`;
+    const messageExecuteFinished = `Cron job ${name} execution finished\n`;
 
     const callbackHandled = async (): Promise<void> => {
       this.consoleLogger.log(messageExecuteStarted, CronService.name);
