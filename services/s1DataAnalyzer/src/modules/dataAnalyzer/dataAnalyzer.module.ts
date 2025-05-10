@@ -1,7 +1,10 @@
 import { ConsoleLogger, Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AmountOfOrders, amountOfOrdersSchema } from '../../../../../shared/src/entities/amountOfOrders.entity';
+import {
+  AmountOfAnalyzedOrders,
+  amountOfAnalyzedOrdersSchema,
+} from '../../../../../shared/src/entities/amountOfOrders.entity';
 import { MetricsOfProduct, MetricsOfProductSchema } from '../../../../../shared/src/entities/metricsOfProduct.entity';
 import { DateOfOrderCounts, dateOfOrderCountsSchema } from '../../../../../shared/src/entities/orderCountDate.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
@@ -22,8 +25,8 @@ import { DataAnalyzerService } from './dataAnalyzer.service';
     MongooseModule.forFeature(
       [
         {
-          name: AmountOfOrders.name,
-          schema: amountOfOrdersSchema,
+          name: AmountOfAnalyzedOrders.name,
+          schema: amountOfAnalyzedOrdersSchema,
         },
         {
           name: MetricsOfProduct.name,

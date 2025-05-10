@@ -1,12 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type AmountOfOrdersDocument = AmountOfOrders & Document;
+export type AmountOfAnalyzedOrdersDocument = AmountOfAnalyzedOrders & Document;
 
 @Schema({ timestamps: true, capped: { max: 1, size: 1 } })
-export class AmountOfOrders {
+export class AmountOfAnalyzedOrders {
   @Prop({ required: true })
   value: number;
 }
 
-export const amountOfOrdersSchema = SchemaFactory.createForClass(AmountOfOrders);
+export const amountOfAnalyzedOrdersSchema = SchemaFactory.createForClass(AmountOfAnalyzedOrders);
