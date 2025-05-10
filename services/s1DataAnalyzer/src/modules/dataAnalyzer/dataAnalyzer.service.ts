@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { LastOrder, LastOrderDocument } from '../../../../../shared/src/entities/lastOrder.entity';
+import { AmountOfOrders, AmountOfOrdersDocument } from '../../../../../shared/src/entities/amountOfOrders';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
 import { AxiosService } from '../../../../../shared/src/modules/axios/axios.service';
 import { CronService } from '../../../../../shared/src/modules/cron/cron.service';
@@ -16,8 +16,8 @@ export class DataAnalyzerService {
   constructor(
     private readonly cronService: CronService,
     private readonly axiosService: AxiosService,
-    @InjectModel(LastOrder.name, DbConnection.DataAnalyzer)
-    private readonly lastOrderModel: Model<LastOrderDocument>,
+    @InjectModel(AmountOfOrders.name, DbConnection.DataAnalyzer)
+    private readonly lastOrderModel: Model<AmountOfOrdersDocument>,
     private readonly configService: ConfigService,
   ) {
     this.addCronJobs();

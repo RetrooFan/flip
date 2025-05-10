@@ -1,12 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type LastOrderDocument = LastOrder & Document;
+export type AmountOfOrdersDocument = AmountOfOrders & Document;
 
 @Schema({ timestamps: true, capped: { max: 1, size: 1 } })
-export class LastOrder {
+export class AmountOfOrders {
   @Prop({ required: true })
-  index: number;
+  value: number;
 }
 
-export const lastOrderSchema = SchemaFactory.createForClass(LastOrder);
+export const amountOfOrdersSchema = SchemaFactory.createForClass(AmountOfOrders);

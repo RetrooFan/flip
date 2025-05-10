@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { LastOrder, lastOrderSchema } from '../../../../../shared/src/entities/lastOrder.entity';
+import { AmountOfOrders, amountOfOrdersSchema } from '../../../../../shared/src/entities/amountOfOrders';
 import { ProductMetric, productMetricSchema } from '../../../../../shared/src/entities/productMetric.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
 import { AxiosModule } from '../../../../../shared/src/modules/axios/axios.module';
@@ -25,8 +25,8 @@ import { DataAnalyzerService } from './dataAnalyzer.service';
           schema: productMetricSchema,
         },
         {
-          name: LastOrder.name,
-          schema: lastOrderSchema,
+          name: AmountOfOrders.name,
+          schema: amountOfOrdersSchema,
         },
       ],
       DbConnection.DataAnalyzer,
