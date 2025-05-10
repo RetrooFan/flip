@@ -17,7 +17,7 @@ export class DataAnalyzerService {
     private readonly cronService: CronService,
     private readonly axiosService: AxiosService,
     @InjectModel(AmountOfOrders.name, DbConnection.DataAnalyzer)
-    private readonly lastOrderModel: Model<AmountOfOrdersDocument>,
+    private readonly amountOfOrdersModel: Model<AmountOfOrdersDocument>,
     private readonly configService: ConfigService,
   ) {
     this.addCronJobs();
