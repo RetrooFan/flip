@@ -24,7 +24,7 @@ export class DataFacilitatorService {
 
   }
 
-  public async setDateTime(setDateTimeQueryDto: SetDateTimeQueryDto): Promise<void> {
+  public async setDateTime(setDateTimeQueryDto: SetDateTimeQueryDto): Promise<string> {
     const timeArray = setDateTimeQueryDto.time.split(':');
     const hours = parseInt(timeArray[0]);
     const minutes = parseInt(timeArray[1]);
@@ -37,7 +37,6 @@ export class DataFacilitatorService {
 
     this.date = date;
 
-    console.log(this.date.toISOString());
-    console.log(this.date.toISOString().split('T')[0]);
+    return `Date ${date.toISOString()} set!`;
   }
 }

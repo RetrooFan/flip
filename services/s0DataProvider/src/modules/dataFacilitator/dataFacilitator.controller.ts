@@ -21,7 +21,7 @@ export class DataFacilitatorController {
   }
 
   @Get('setDateTime')
-  private async setDateTime(@Query('date') date: string, @Query('time') time: string): Promise<void> {
+  private async setDateTime(@Query('date') date: string, @Query('time') time: string): Promise<string> {
     const setDateTimeQueryDto: SetDateTimeQueryDto = { date, time };
 
     return await errorRethrower(
