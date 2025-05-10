@@ -22,7 +22,7 @@ export class DataFetcherService {
     const queryLimit = parseInt(process.env.ITEMS_NUMBER_QUERY_LIMIT);
     const limit = itemsNumber < queryLimit ? itemsNumber : queryLimit;
     const promisesNumber = Math.ceil(itemsNumber / limit);
-    const results: Order[] = [];
+    const orders: Order[] = [];
     const message = `Loading ${itemsNumber} items`;
     let page = 1;
 
@@ -36,13 +36,13 @@ export class DataFetcherService {
         baseURL: process.env.DATA_SOURCE_API,
       });
 
-      results.push(...result.data);
+      orders.push(...result.data);
 
       this.consoleLogger.log(`${message} - ${Math.round((page * 100) / promisesNumber)} %`, 'DataFetcherService');
 
       page++;
     }
 
-    return results;
+    return orders;
   }
 }
