@@ -13,8 +13,7 @@ export class CronService {
     const messageExecuteFinished = `Cron job ${name} execution finished`;
 
     const callbackHandled = async (): Promise<void> => {
-      const start = Date.now();
-
+      const startTime = Date.now();
       this.consoleLogger.log(messageExecuteStarted, CronService.name);
 
       try {
@@ -23,14 +22,11 @@ export class CronService {
         logError(this.consoleLogger, error, CronService.name);
       }
 
-      const end = Date.now();
-      const duration = end - start;
-
+      const duration = Date.now() - startTime;
       this.consoleLogger.log(`${messageExecuteFinished} in ${duration} ms\n`, CronService.name);
     };
 
     const job = new CronJob(cronTime, callbackHandled);
-
     this.schedulerRegistry.addCronJob(name, job);
     job.start();
 
