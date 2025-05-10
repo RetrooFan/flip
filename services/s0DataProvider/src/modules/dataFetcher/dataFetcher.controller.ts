@@ -1,6 +1,7 @@
 import { Controller, Get, ParseIntPipe, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { DataFetcherQueryDto } from '../../../../../shared/src/dtos/dataFetcherQuery.dto';
+import { Order } from '../../../../../shared/src/entities/order.entity';
 import { DataFetcherService } from './dataFetcher.service';
 
 @Controller()
@@ -29,7 +30,7 @@ export class DataFetcherController {
   }
 
   @Get('read')
-  private async read(): Promise<string> {
+  private async read(): Promise<Order[]> {
     return await this.dataFetcherService.read();
   }
 }
