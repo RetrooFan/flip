@@ -47,7 +47,7 @@ services:
       npm i --only=${NODE_ENV} &&
       npm run ${NODE_ENV}"
     depends_on:
-      - mongo
+      - s0DataProvider
 
   s2MetricsProvider:
     container_name: flip-${NODE_ENV}-s2MetricsProvider
@@ -73,7 +73,7 @@ services:
       npm i --only=${NODE_ENV} &&
       npm run ${NODE_ENV}"
     depends_on:
-      - mongo
+      - s1DataAnalyzer
 
   mongo:
     container_name: flip-${NODE_ENV}-mongo
