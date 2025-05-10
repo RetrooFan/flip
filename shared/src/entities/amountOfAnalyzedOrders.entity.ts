@@ -5,8 +5,6 @@ export type AmountOfAnalyzedOrdersDocument = AmountOfAnalyzedOrders & Document;
 
 @Schema({ timestamps: true, capped: { max: 1, size: 1 } })
 export class AmountOfAnalyzedOrders {
-  _id: string;
-
   @Prop({ required: true })
   value: number;
 }
