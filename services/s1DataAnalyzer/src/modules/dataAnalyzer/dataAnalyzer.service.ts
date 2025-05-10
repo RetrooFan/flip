@@ -8,7 +8,7 @@ export class DataAnalyzerService {
   private message = 'BLA';
 
   constructor(cronService: CronService) {
-    cronService.addJob(DataAnalyzerService.name, process.env.DATA_ANALYZER_CRON_TIME, () =>
+    cronService.addJob('DATA_ANALYZER_CRON_TIME', process.env.DATA_ANALYZER_CRON_TIME, () =>
       errorRethrower(this.analyzeData(), S1DataAnalyzerUnknownError),
     );
   }
