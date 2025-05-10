@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Customer } from '../types/customer.type';
-import { Item } from '../types/item.type';
+import { Customer } from '../types/customer.class';
+import { Item } from '../types/item.class';
 
 export type OrderDocument = Order & Document;
 
