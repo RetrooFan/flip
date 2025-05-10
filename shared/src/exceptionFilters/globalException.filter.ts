@@ -1,8 +1,9 @@
 import { ExceptionFilter, Catch, ArgumentsHost } from '@nestjs/common';
 import { Response } from 'express';
 import { FlipError } from '../errors/flip.error';
+import { FlipUnknownError } from '../errors/flipUnknown.error';
 
-@Catch(FlipError)
+@Catch(FlipError, FlipUnknownError)
 export class GlobalExceptionFilter implements ExceptionFilter {
   // eslint-disable-next-line class-methods-use-this
   catch(error: Error, host: ArgumentsHost): void {

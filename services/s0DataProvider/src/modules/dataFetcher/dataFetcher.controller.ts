@@ -3,7 +3,7 @@ import { Response } from 'express';
 import { DataFetcherQueryDto } from './dtos/dataFetcherQuery.dto';
 import { Order } from '../../../../../shared/src/entities/order.entity';
 import { DataFetcherService } from './dataFetcher.service';
-import { S0DataProviderError } from '../../errors/s0DataProvider.error';
+import { S0DataProviderUnknownError } from '../../errors/s0DataProvider.error';
 import { errorRethrower } from '../../../../../shared/src/utils';
 
 @Controller()
@@ -20,21 +20,21 @@ export class DataFetcherController {
 
     response.status(HttpStatus.OK).send('Data loading started!');
 
-    await errorRethrower(this.dataFetcherService.loadData(dataFetcherQueryDto), S0DataProviderError);
+    await errorRethrower(this.dataFetcherService.loadData(dataFetcherQueryDto), S0DataProviderUnknownError);
   }
 
   @Get('stop')
   private async stopLoading(): Promise<string> {
-    return await errorRethrower(this.dataFetcherService.stopLoading(), S0DataProviderError);
+    return await errorRethrower(this.dataFetcherService.stopLoading(), S0DataProviderUnknownError);
   }
 
   @Get('abort')
   private async abortLoading(): Promise<string> {
-    return await errorRethrower(this.dataFetcherService.abortLoading(), S0DataProviderError);
+    return await errorRethrower(this.dataFetcherService.abortLoading(), S0DataProviderUnknownError);
   }
 
   @Get('read')
   private async read(): Promise<Order[]> {
-    return await errorRethrower(this.dataFetcherService.read(), S0DataProviderError);
+    return await errorRethrower(this.dataFetcherService.read(), S0DataProviderUnknownError);
   }
 }

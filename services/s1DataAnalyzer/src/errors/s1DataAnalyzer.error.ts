@@ -1,3 +1,3 @@
-import { FlipError } from '../../../../shared/src/errors/flip.error';
+import { FlipUnknownError } from '../../../../shared/src/errors/flipUnknown.error';
 
-export class S1DataAnalyzerError extends FlipError {}
+export class S1DataAnalyzerUnknownError extends FlipUnknownError {}
