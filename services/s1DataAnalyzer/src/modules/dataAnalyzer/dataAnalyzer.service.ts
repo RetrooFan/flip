@@ -82,7 +82,7 @@ export class DataAnalyzerService {
 
       if (!dateOfOrderCounts) {
         await new this.dateOfOrderCountsModel({ value }).save();
-      } else if (dateOfOrderCounts.value !== value) {
+      } else if (value > dateOfOrderCounts.value) {
         await this.orderCountReset(value);
         dateOfOrderCounts.value = value;
         await new this.dateOfOrderCountsModel(dateOfOrderCounts).save();
