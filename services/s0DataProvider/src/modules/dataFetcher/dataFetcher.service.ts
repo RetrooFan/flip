@@ -6,6 +6,7 @@ import { LoadDataQueryDto } from './dtos/dataFetcherQuery.dto';
 import { Order, OrderDocument } from '../../../../../shared/src/entities/order.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
 import { AxiosService } from '../../../../../shared/src/modules/axios/axios.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class DataFetcherService {
@@ -18,6 +19,7 @@ export class DataFetcherService {
     private readonly consoleLogger: ConsoleLogger,
     @InjectModel(Order.name, DbConnection.DataFetcher)
     private readonly orderModel: Model<OrderDocument>,
+    private readonly configService: ConfigService,
   ) {
     this.axiosInstance = axiosService.getAxios();
   }
@@ -51,7 +53,7 @@ export class DataFetcherService {
   }
 
   private async fetchData(startPage: number, endPage: number): Promise<Order[]> {
-    const limit = parseInt(process.env.ITEMS_NUMBER_QUERY_LIMIT);
+    const limit = this.configService.get<number>('itemsNumberQueryLimit');
     const pagesNumber = endPage - startPage + 1;
     const itemsNumber = pagesNumber * limit;
     const orders: Order[] = [];
@@ -67,7 +69,7 @@ export class DataFetcherService {
       let data: Order[];
 
       try {
-        const baseURL = process.env.DATA_SOURCE_API;
+        const baseURL = this.configService.get<string>('dataSourceApi');
         ({ data } = await this.axiosInstance.get('orders', { params, baseURL }));
       } catch (error) {
         data = [];

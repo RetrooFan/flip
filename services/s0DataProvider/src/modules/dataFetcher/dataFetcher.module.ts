@@ -1,4 +1,5 @@
 import { ConsoleLogger, Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Order, orderSchema } from '../../../../../shared/src/entities/order.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
@@ -9,9 +10,11 @@ import { DataFetcherService } from './dataFetcher.service';
 @Module({
   imports: [
     MongooseModule.forRootAsync({
-      useFactory: () => ({
-        uri: process.env.MONGODB_URI_FLIP,
-      }),
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => {
+        const uri = configService.get<string>('mongoDbUriFlip');
+        return { uri };
+      },
       connectionName: DbConnection.DataFetcher,
     }),
     MongooseModule.forFeature(
