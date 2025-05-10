@@ -67,11 +67,10 @@ export class DataFetcherService {
 
       try {
         data = await this.axiosService.request<Order[]>({ url, params, baseURL });
+        orders.push(...data);
       } catch (error) {
         this.consoleLogger.error(error, DataFetcherService.name);
       }
-
-      orders.push(...data);
 
       const message = `Loaded page ${i} (${data.length} items)`;
       this.consoleLogger.log(
