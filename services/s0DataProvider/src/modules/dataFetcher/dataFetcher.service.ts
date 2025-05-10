@@ -65,14 +65,12 @@ export class DataFetcherService {
 
     for (let i = startPage; i < endPage + 1; i++) {
       const params = { _page: i, _limit: limit };
-
-      let data: Order[];
+      const baseURL = this.configService.get<string>('dataSourceApi');
+      let data: Order[] = [];
 
       try {
-        const baseURL = this.configService.get<string>('dataSourceApi');
         ({ data } = await this.axiosInstance.get('orders', { params, baseURL }));
       } catch (error) {
-        data = [];
         this.consoleLogger.error(error, DataFetcherService.name);
       }
 
