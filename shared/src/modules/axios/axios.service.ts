@@ -16,9 +16,12 @@ export class AxiosService {
 
   public async request<T = unknown>(options: AxiosRequestConfig): Promise<T> {
     try {
+      const result = await this.getAxios().request<T>(options);
+
+      this.consoleLogger.log(`${result.status} ${result.statusText}`, AxiosService.name);
       this.consoleLogger.log(options, AxiosService.name);
 
-      return (await this.getAxios().request<T>(options)).data;
+      return result.data;
     } catch (error) {
       this.consoleLogger.error(error.constructor.name, AxiosService.name);
       this.consoleLogger.error(error.response.data, AxiosService.name);
