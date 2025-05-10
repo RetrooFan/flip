@@ -108,7 +108,7 @@ export class DataFetcherService {
     }
 
     if (rejectedCounter) {
-      this.consoleLogger.error(`Failed records: ${rejectedCounter}`, DataFetcherService.name);
+      this.consoleLogger.error(`Failed saving records: ${rejectedCounter}`, DataFetcherService.name);
     }
 
     if (fulfilledCounter) {
