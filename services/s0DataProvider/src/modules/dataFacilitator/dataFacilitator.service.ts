@@ -5,6 +5,7 @@ import { GetOrdersQueryDto } from './dtos/getOrdersQueryDto';
 import { Order, OrderDocument } from '../../../../../shared/src/entities/order.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
 import { SetDateTimeQueryDto } from './dtos/setDateTimeQueryDto';
+import { DateEntity, DateEntityDocument } from '../../../../../shared/src/entities/dateEntity.entity';
 
 @Injectable()
 export class DataFacilitatorService {
@@ -13,6 +14,8 @@ export class DataFacilitatorService {
   constructor(
     @InjectModel(Order.name, DbConnection.DataFacilitator)
     private readonly orderModel: Model<OrderDocument>,
+    @InjectModel(DateEntity.name, DbConnection.DataFacilitator)
+    private readonly dateEntityModel: Model<DateEntityDocument>,
   ) {
     this.date = new Date('2000-01-01');
   }
