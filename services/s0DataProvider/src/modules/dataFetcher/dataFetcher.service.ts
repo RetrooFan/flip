@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { AxiosStatic } from 'axios';
 import { Response } from 'express';
 import { Model } from 'mongoose';
+import { DataFetcherQueryDto } from '../../../../../shared/src/dtos/dataFetcherParams.dto';
 import { Order, OrderDocument } from '../../../../../shared/src/entities/order.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
 import { AxiosService } from '../../../../../shared/src/modules/axios/axios.service';
@@ -20,24 +21,23 @@ export class DataFetcherService {
     this.axiosInstance = axiosService.getAxios();
   }
 
-  public async loadData(response: Response): Promise<void> {
+  public async loadData(response: Response, dataFetcherQueryDto: DataFetcherQueryDto): Promise<void> {
     response.status(HttpStatus.OK).send('Data loading started!');
 
-    await this.fetchData(parseInt(process.env.ITEMS_NUMBER));
+    await this.fetchData(dataFetcherQueryDto.startPage, dataFetcherQueryDto.endPage);
   }
 
-  private async fetchData(itemsNumber: number): Promise<Order[]> {
-    const queryLimit = parseInt(process.env.ITEMS_NUMBER_QUERY_LIMIT);
-    const limit = itemsNumber < queryLimit ? itemsNumber : queryLimit;
-    const promisesNumber = Math.ceil(itemsNumber / limit);
+  private async fetchData(startPage: number, endPage: number): Promise<Order[]> {
+    const limit = parseInt(process.env.ITEMS_NUMBER_QUERY_LIMIT);
+    const pagesNumber = endPage - startPage + 1;
+    const itemsNumber = pagesNumber * limit;
     const orders: Order[] = [];
-    const message = `Loading ${itemsNumber} items`;
-    let page = 1;
+    const message = `Loading pages ${startPage} - ${endPage} (${itemsNumber} items)`;
 
     this.consoleLogger.log(`${message} - 0 %`, 'DataFetcherService');
 
-    for (let i = 0; i < promisesNumber; i++) {
-      const params = { _page: page, _limit: limit };
+    for (let i = startPage; i < endPage + 1; i++) {
+      const params = { _page: i, _limit: limit };
 
       const result = await this.axiosInstance.get('orders', {
         params,
@@ -46,9 +46,10 @@ export class DataFetcherService {
 
       orders.push(...result.data);
 
-      this.consoleLogger.log(`${message} - ${Math.round((page * 100) / promisesNumber)} %`, 'DataFetcherService');
-
-      page++;
+      this.consoleLogger.log(
+        `${message} - ${Math.round(((i - startPage + 1) * 100) / pagesNumber)} %`,
+        'DataFetcherService',
+      );
     }
 
     return orders;
