@@ -4,7 +4,7 @@ import { FlipError } from '../errors/flip.error';
 import { FlipUnknownError } from '../errors/flipUnknown.error';
 
 @Catch(FlipError, FlipUnknownError)
-export class GlobalExceptionFilter implements ExceptionFilter {
+export class FlipExceptionFilter implements ExceptionFilter {
   private readonly consoleLogger: ConsoleLogger;
 
   constructor(app: INestApplication) {
@@ -23,6 +23,6 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     });
 
     const message = [error.constructor.name, error.stack].join('\n');
-    this.consoleLogger.error(message, GlobalExceptionFilter.name);
+    this.consoleLogger.error(message, FlipExceptionFilter.name);
   }
 }
