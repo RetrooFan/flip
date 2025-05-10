@@ -25,6 +25,7 @@ services:
       npm run ${NODE_ENV}"
     depends_on:
       - mongo
+
   s1DataAnalyzer:
     container_name: flip-${NODE_ENV}-s1DataAnalyzer
     image: node:18.7.0
@@ -50,6 +51,7 @@ services:
       npm run ${NODE_ENV}"
     depends_on:
       - mongo
+
   mongo:
     container_name: flip-${NODE_ENV}-mongo
     image: mongo:5.0.10
@@ -58,6 +60,7 @@ services:
       - 27017:27017
     volumes:
       - mongo:/data/db
+
 volumes:
   s0DataProvider:
     name: flip-${NODE_ENV}-s0DataProvider
