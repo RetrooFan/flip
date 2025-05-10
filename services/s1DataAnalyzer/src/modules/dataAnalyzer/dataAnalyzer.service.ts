@@ -84,7 +84,7 @@ export class DataAnalyzerService {
     this.analysisRunning = false;
   }
 
-  private async productYesterdayCounterCallback(): Promise<void> {
-    console.log(this.message, DataAnalyzerService.name);
+  private async orderCountReset(): Promise<void> {
+    this.consoleLogger.log('DataAnalyzerService.orderCountReset', DataAnalyzerService.name);
   }
 }
