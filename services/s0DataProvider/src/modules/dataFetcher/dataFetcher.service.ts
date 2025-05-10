@@ -64,26 +64,18 @@ export class DataFetcherService {
   }
 
   private async saveData(orders: Order[]): Promise<void> {
-    const promises = [];
-
-    orders.forEach((order) => {
-      promises.push(new this.orderModel(order).save());
-    });
-
-    const results = await Promise.allSettled<Order>(promises);
     let rejectedCounter = 0;
     let fulfilledCounter = 0;
 
-    results.forEach((result) => {
-      if (isRejected(result)) {
-        rejectedCounter++;
-        this.consoleLogger.error(result.reason, 'DataFetcherService');
-      }
-
-      if (isFulfilled(result)) {
+    for (let i = 0; i < orders.length; i++) {
+      try {
+        await new this.orderModel(orders[i]).save();
         fulfilledCounter++;
+      } catch (error) {
+        rejectedCounter++;
+        this.consoleLogger.error(error, 'DataFetcherService');
       }
-    });
+    }
 
     if (rejectedCounter) {
       this.consoleLogger.error(`Rejected requests: ${rejectedCounter}`, 'DataFetcherService');
@@ -92,17 +84,5 @@ export class DataFetcherService {
     if (fulfilledCounter) {
       this.consoleLogger.log(`Fulfilled requests: ${fulfilledCounter}`, 'DataFetcherService');
     }
-  }
-}
-
-function isFulfilled(result: PromiseSettledResult<Order>): result is PromiseRejectedResult {
-  if (result.status === 'fulfilled') {
-    return true;
-  }
-}
-
-function isRejected(result: PromiseSettledResult<Order>): result is PromiseRejectedResult {
-  if (result.status === 'rejected') {
-    return true;
   }
 }
