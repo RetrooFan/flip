@@ -1,8 +1,8 @@
 import { BullModule } from '@nestjs/bull';
 import { Module } from '@nestjs/common';
 import { parse } from 'url';
-import { RedisModule } from '../../../../../shared/src/modules/redis/redis.module';
-import { RedisService } from '../../../../../shared/src/modules/redis/redis.service';
+import { RedisModule } from '../redis/redis.module';
+import { RedisService } from '../redis/redis.service';
 import { ExperimentalService } from './experimental.service';
 
 @Module({
