@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { ConsoleLogger, Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AmountOfOrders, amountOfOrdersSchema } from '../../../../../shared/src/entities/amountOfOrders.entity';
@@ -34,6 +34,6 @@ import { DataAnalyzerService } from './dataAnalyzer.service';
     CronModule,
     AxiosModule,
   ],
-  providers: [DataAnalyzerService],
+  providers: [DataAnalyzerService, ConsoleLogger],
 })
 export class DataAnalyzerModule {}

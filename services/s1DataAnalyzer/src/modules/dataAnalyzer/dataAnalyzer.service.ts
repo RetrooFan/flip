@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConsoleLogger, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -24,6 +24,7 @@ export class DataAnalyzerService {
     private readonly configService: ConfigService,
     @InjectModel(MetricsOfProduct.name, DbConnection.DataAnalyzer)
     private readonly metricsOfProduct: Model<MetricsOfProductDocument>,
+    private readonly consoleLogger: ConsoleLogger,
   ) {
     this.addCronJobs();
   }
@@ -82,6 +83,9 @@ export class DataAnalyzerService {
     if (value > currentValue && data.length) {
       await new this.amountOfOrdersModel({ value }).save();
     }
+
+    const message = `Analyzed ${data.length - counter} orders!`;
+    this.consoleLogger.log(message, DataAnalyzerService.name);
 
     this.analysisRunning = false;
   }
