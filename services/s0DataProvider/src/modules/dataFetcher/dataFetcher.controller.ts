@@ -8,13 +8,13 @@ export class DataFetcherController {
   constructor(private readonly dataFetcherService: DataFetcherService) {}
 
   @Get('load')
-  private loadData(
+  private async loadData(
     @Res() response: Response,
     @Query('startPage', ParseIntPipe) startPage: number,
     @Query('endPage', ParseIntPipe) endPage: number,
-  ): void {
+  ): Promise<void> {
     const dataFetcherQueryDto: DataFetcherQueryDto = { startPage, endPage };
 
-    this.dataFetcherService.loadData(response, dataFetcherQueryDto);
+    await this.dataFetcherService.loadData(response, dataFetcherQueryDto);
   }
 }
