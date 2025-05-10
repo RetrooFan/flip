@@ -49,6 +49,9 @@ export class DataFetcherService {
   }
 
   private async fetchData(startPage: number, endPage: number): Promise<Order[]> {
+    this.stopLoadingFlag = false;
+    this.abortLoadingFlag = false;
+
     const limit = this.configService.get<number>('itemsNumberQueryLimit');
     const pagesNumber = endPage - startPage + 1;
     const itemsNumber = pagesNumber * limit;
@@ -56,8 +59,6 @@ export class DataFetcherService {
     const initialMessage = `Loading pages ${startPage} - ${endPage} (${pagesNumber} pages - ${itemsNumber} items)`;
 
     this.consoleLogger.log(`${initialMessage} - 0 %`, DataFetcherService.name);
-    this.stopLoadingFlag = false;
-    this.abortLoadingFlag = false;
 
     for (let i = startPage; i < endPage + 1; i++) {
       const baseURL = this.configService.get<string>('dataSourceApi');
