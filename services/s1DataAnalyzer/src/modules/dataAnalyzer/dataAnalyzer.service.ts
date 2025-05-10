@@ -99,6 +99,7 @@ export class DataAnalyzerService {
           metricsOfProduct = {
             _id: item.product.id,
             name: item.product.name,
+            price: item.product.price,
             salesValue: item.quantity * item.product.price,
             orderCountTotal: 1,
             orderCountToday: 1,

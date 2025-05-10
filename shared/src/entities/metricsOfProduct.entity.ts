@@ -11,6 +11,9 @@ export class MetricsOfProduct {
   @Prop({ required: true })
   name: string;
 
+  @Prop({ required: true })
+  price: number;
+
   @Prop({ required: true, index: -1 })
   salesValue: number;
 
