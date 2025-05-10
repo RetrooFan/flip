@@ -10,7 +10,6 @@ import { AxiosService } from '../../../../../shared/src/modules/axios/axios.serv
 @Injectable()
 export class DataFetcherService {
   private readonly axiosInstance: AxiosStatic;
-  private readonly serviceName: string;
   private stopLoadingFlag: boolean;
   private abortLoadingFlag: boolean;
 
@@ -21,7 +20,6 @@ export class DataFetcherService {
     private readonly orderModel: Model<OrderDocument>,
   ) {
     this.axiosInstance = axiosService.getAxios();
-    this.serviceName = DataFetcherService.name;
   }
 
   public async loadData(dataFetcherQueryDto: DataFetcherQueryDto): Promise<void> {
@@ -34,7 +32,7 @@ export class DataFetcherService {
     this.stopLoadingFlag = true;
     const message = 'Data loading stopped!';
 
-    this.consoleLogger.warn(message, this.serviceName);
+    this.consoleLogger.warn(message, DataFetcherService.name);
 
     return message;
   }
@@ -43,7 +41,7 @@ export class DataFetcherService {
     this.abortLoadingFlag = true;
     const message = 'Data loading aborted!';
 
-    this.consoleLogger.warn(message, this.serviceName);
+    this.consoleLogger.warn(message, DataFetcherService.name);
 
     return message;
   }
@@ -59,7 +57,7 @@ export class DataFetcherService {
     const orders: Order[] = [];
     const initialMessage = `Loading pages ${startPage} - ${endPage} (${pagesNumber} pages - ${itemsNumber} items)`;
 
-    this.consoleLogger.log(`${initialMessage} - 0 %`, this.serviceName);
+    this.consoleLogger.log(`${initialMessage} - 0 %`, DataFetcherService.name);
     this.stopLoadingFlag = false;
     this.abortLoadingFlag = false;
 
@@ -73,7 +71,7 @@ export class DataFetcherService {
         ({ data } = await this.axiosInstance.get('orders', { params, baseURL }));
       } catch (error) {
         data = [];
-        this.consoleLogger.error(error, this.serviceName);
+        this.consoleLogger.error(error, DataFetcherService.name);
       }
 
       orders.push(...data);
@@ -81,7 +79,7 @@ export class DataFetcherService {
       const message = `Loaded page ${i} (${data.length} items)`;
       this.consoleLogger.log(
         `${message} - ${Math.round(((i - startPage + 1) * 100) / pagesNumber)} %`,
-        this.serviceName,
+        DataFetcherService.name,
       );
 
       if (this.stopLoadingFlag) {
@@ -108,16 +106,16 @@ export class DataFetcherService {
         fulfilledCounter++;
       } catch (error) {
         rejectedCounter++;
-        // this.consoleLogger.error(error, this.serviceName);
+        // this.consoleLogger.error(error, DataFetcherService.name);
       }
     }
 
     if (rejectedCounter) {
-      this.consoleLogger.error(`Rejected requests: ${rejectedCounter}`, this.serviceName);
+      this.consoleLogger.error(`Rejected requests: ${rejectedCounter}`, DataFetcherService.name);
     }
 
     if (fulfilledCounter) {
-      this.consoleLogger.log(`Fulfilled requests: ${fulfilledCounter}`, this.serviceName);
+      this.consoleLogger.log(`Fulfilled requests: ${fulfilledCounter}`, DataFetcherService.name);
     }
   }
 }
