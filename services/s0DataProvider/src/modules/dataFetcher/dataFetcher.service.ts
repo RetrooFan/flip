@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { AxiosStatic } from 'axios';
 import { Response } from 'express';
 import { Model } from 'mongoose';
-import { DataFetcherQueryDto } from '../../../../../shared/src/dtos/dataFetcherQuery.dto';
+import { DataFetcherQueryDto } from './dtos/dataFetcherQuery.dto';
 import { Order, OrderDocument } from '../../../../../shared/src/entities/order.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
 import { AxiosService } from '../../../../../shared/src/modules/axios/axios.service';
