@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { DataFacilitatorModule } from './dataFacilitator/dataFacilitator.module';
-import { DataFetcherModule } from './dataFetcher/dataFetcher.module';
-import { HelloModule } from './helloModule/hello.module';
+import { DataFacilitatorModule } from './modules/dataFacilitator/dataFacilitator.module';
+import { DataFetcherModule } from './modules/dataFetcher/dataFetcher.module';
+import { HelloModule } from './modules/helloModule/hello.module';
 
 @Module({
   imports: [ConfigModule.forRoot(), HelloModule, DataFetcherModule, DataFacilitatorModule],
