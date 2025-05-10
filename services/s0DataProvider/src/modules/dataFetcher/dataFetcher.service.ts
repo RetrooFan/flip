@@ -15,7 +15,7 @@ export class DataFetcherService {
   private abortLoadingFlag: boolean;
 
   constructor(
-    axiosService: AxiosService,
+    private readonly axiosService: AxiosService,
     private readonly consoleLogger: ConsoleLogger,
     @InjectModel(Order.name, DbConnection.DataFetcher)
     private readonly orderModel: Model<OrderDocument>,
@@ -66,10 +66,11 @@ export class DataFetcherService {
     for (let i = startPage; i < endPage + 1; i++) {
       const params = { _page: i, _limit: limit };
       const baseURL = this.configService.get<string>('dataSourceApi');
+      const url = 'orders';
       let data: Order[] = [];
 
       try {
-        ({ data } = await this.axiosInstance.get('orders', { params, baseURL }));
+        data = await this.axiosService.request({ url, params, baseURL });
       } catch (error) {
         this.consoleLogger.error(error, DataFetcherService.name);
       }
