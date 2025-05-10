@@ -1,5 +1,10 @@
 {
   "name": "flip-recruitment-task",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
   "scripts": {
     "lint:s0DataProvider": "eslint 'services/s0DataProvider'",
     "lint:s1DataAnalyzer": "eslint 'services/s1DataAnalyzer'",
