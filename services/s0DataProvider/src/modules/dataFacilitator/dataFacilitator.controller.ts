@@ -1,5 +1,5 @@
 import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common';
-import { DataFacilitatorQueryDto } from './dtos/dataFacilitatorQuery.dto';
+import { GetOrdersQueryDto } from './dtos/getOrdersQueryDto';
 import { DataFacilitatorService } from './dataFacilitator.service';
 import { Order } from '../../../../../shared/src/entities/order.entity';
 import { errorRethrower } from '../../../../../shared/src/utils';
@@ -14,11 +14,8 @@ export class DataFacilitatorController {
     @Query('_page', ParseIntPipe) _page: number,
     @Query('_limit', ParseIntPipe) _limit: number,
   ): Promise<Order[]> {
-    const dataFacilitatorQueryDto: DataFacilitatorQueryDto = { _page, _limit };
+    const getOrdersQueryDto: GetOrdersQueryDto = { _page, _limit };
 
-    return await errorRethrower(
-      this.dataFacilitatorService.getOrders(dataFacilitatorQueryDto),
-      S0DataProviderUnknownError,
-    );
+    return await errorRethrower(this.dataFacilitatorService.getOrders(getOrdersQueryDto), S0DataProviderUnknownError);
   }
 }
