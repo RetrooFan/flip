@@ -4,7 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import {
   AmountOfAnalyzedOrders,
   amountOfAnalyzedOrdersSchema,
-} from '../../../../../shared/src/entities/amountOfOrders.entity';
+} from '../../../../../shared/src/entities/amountOfAnalyzedOrders.entity';
 import { MetricsOfProduct, MetricsOfProductSchema } from '../../../../../shared/src/entities/metricsOfProduct.entity';
 import { DateOfOrderCounts, dateOfOrderCountsSchema } from '../../../../../shared/src/entities/orderCountDate.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';

@@ -5,7 +5,7 @@ import { Model } from 'mongoose';
 import {
   AmountOfAnalyzedOrders,
   AmountOfAnalyzedOrdersDocument,
-} from '../../../../../shared/src/entities/amountOfOrders.entity';
+} from '../../../../../shared/src/entities/amountOfAnalyzedOrders.entity';
 import { MetricsOfProduct, MetricsOfProductDocument } from '../../../../../shared/src/entities/metricsOfProduct.entity';
 import { Order } from '../../../../../shared/src/entities/order.entity';
 import { DateOfOrderCounts, DateOfOrderCountsDocument } from '../../../../../shared/src/entities/orderCountDate.entity';
