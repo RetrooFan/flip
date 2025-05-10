@@ -5,6 +5,6 @@ import { DataFetcherModule } from './dataFetcher/dataFetcher.module';
 import { HelloModule } from './helloModule/hello.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), HelloModule, DataFetcherModule, DataFacilitatorModule],
+  imports: [ConfigModule.forRoot(), HelloModule, DataFetcherModule, DataFacilitatorModule],
 })
 export class AppModule {}
