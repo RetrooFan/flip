@@ -2,12 +2,18 @@
   "name": "flip-recruitment-task",
   "scripts": {
     "lint:s0DataProvider": "eslint 'services/s0DataProvider'",
+    "lint:s1DataAnalyzer": "eslint 'services/s1DataAnalyzer'",
+    "lint:s2MetricsProvider": "eslint 'services/s2MetricsProvider'",
     "lint:shared": "eslint 'shared'",
     "lint:all": "eslint '**/*.ts'",
     "format:s0DataProvider": "eslint 'services/s0DataProvider' --fix",
+    "format:s1DataAnalyzer": "eslint 'services/s1DataAnalyzer' --fix",
+    "format:s2MetricsProvider": "eslint 'services/s2MetricsProvider' --fix",
     "format:shared": "eslint 'shared' --fix",
     "format:all": "eslint '**/*.ts' --fix",
     "jest:s0DataProvider": "jest services/s0DataProvider",
+    "jest:s1DataAnalyzer": "jest services/s1DataAnalyzer",
+    "jest:s2MetricsProvider": "jest services/s2MetricsProvider",
     "jest:all": "jest services",
     "jest:all:debug": "node --inspect-brk=0.0.0.0 node_modules/.bin/jest --runInBand services"
   },
