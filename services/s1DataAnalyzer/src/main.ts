@@ -9,6 +9,7 @@ async function bootstrap(): Promise<void> {
   const configService = app.get<ConfigService>(ConfigService);
   const port = configService.get<number>('port');
   await app.listen(port);
+  console.log();
 }
 
 bootstrap();
