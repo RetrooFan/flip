@@ -29,7 +29,7 @@ export class DataFetcherController {
   }
 
   @Get('read')
-  private read(): string {
-    return this.dataFetcherService.read();
+  private async read(): Promise<string> {
+    return await this.dataFetcherService.read();
   }
 }

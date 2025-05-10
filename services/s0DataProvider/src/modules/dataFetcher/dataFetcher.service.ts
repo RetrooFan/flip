@@ -49,7 +49,7 @@ export class DataFetcherService {
     return message;
   }
 
-  public read(): string {
+  public async read(): Promise<string> {
     return 'Read!';
   }
 
