@@ -13,20 +13,59 @@ export class MetricsProviderService {
   ) {}
 
   public async top10SalesValue(): Promise<Product[]> {
-    this.metricsOfProductModel;
+    const products: Product[] = [];
+    const metricsOfProducts = await this.metricsOfProductModel
+      .find<MetricsOfProduct>()
+      .limit(10)
+      .sort({ salesValue: -1 });
 
-    return [];
+    metricsOfProducts.forEach((metricsOfProduct) => {
+      products.push({
+        id: metricsOfProduct._id,
+        name: metricsOfProduct.name,
+        price: metricsOfProduct.price,
+        salesValue: metricsOfProduct.salesValue,
+      });
+    });
+
+    return products;
   }
 
   public async top10OrderCount(): Promise<Product[]> {
-    this.metricsOfProductModel;
+    const products: Product[] = [];
+    const metricsOfProducts = await this.metricsOfProductModel
+      .find<MetricsOfProduct>()
+      .limit(10)
+      .sort({ orderCountTotal: -1 });
 
-    return [];
+    metricsOfProducts.forEach((metricsOfProduct) => {
+      products.push({
+        id: metricsOfProduct._id,
+        name: metricsOfProduct.name,
+        price: metricsOfProduct.price,
+        orderCountTotal: metricsOfProduct.orderCountTotal,
+      });
+    });
+
+    return products;
   }
 
   public async top10OrderCountYesterday(): Promise<Product[]> {
-    this.metricsOfProductModel;
+    const products: Product[] = [];
+    const metricsOfProducts = await this.metricsOfProductModel
+      .find<MetricsOfProduct>()
+      .limit(10)
+      .sort({ orderCountYesterday: -1 });
 
-    return [];
+    metricsOfProducts.forEach((metricsOfProduct) => {
+      products.push({
+        id: metricsOfProduct._id,
+        name: metricsOfProduct.name,
+        price: metricsOfProduct.price,
+        orderCountYesterday: metricsOfProduct.orderCountYesterday,
+      });
+    });
+
+    return products;
   }
 }
