@@ -1,10 +1,10 @@
 import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common';
-import DataFacilitatorQueryDto from './dtos/dataFacilitatorQuery.dto';
-import DataFacilitatorService from './dataFacilitator.service';
+import { DataFacilitatorQueryDto } from './dtos/dataFacilitatorQuery.dto';
+import { DataFacilitatorService } from './dataFacilitator.service';
 import { Order } from '../../../../../shared/src/entities/order.entity';
 
 @Controller()
-export default class DataFacilitatorController {
+export class DataFacilitatorController {
   constructor(private readonly dataFacilitatorService: DataFacilitatorService) {}
 
   @Get('orders')

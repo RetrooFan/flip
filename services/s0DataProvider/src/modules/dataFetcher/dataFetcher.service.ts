@@ -2,13 +2,13 @@ import { ConsoleLogger, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { AxiosStatic } from 'axios';
 import { Model } from 'mongoose';
-import DataFetcherQueryDto from './dtos/dataFetcherQuery.dto';
+import { DataFetcherQueryDto } from './dtos/dataFetcherQuery.dto';
 import { Order, OrderDocument } from '../../../../../shared/src/entities/order.entity';
-import DbConnection from '../../../../../shared/src/enums/dbConnection.enum';
-import AxiosService from '../../../../../shared/src/modules/axios/axios.service';
+import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
+import { AxiosService } from '../../../../../shared/src/modules/axios/axios.service';
 
 @Injectable()
-export default class DataFetcherService {
+export class DataFetcherService {
   private readonly axiosInstance: AxiosStatic;
   private readonly serviceName: string;
   private stopLoadingFlag: boolean;

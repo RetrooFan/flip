@@ -1,11 +1,11 @@
 import { Controller, Get, HttpStatus, ParseIntPipe, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
-import DataFetcherQueryDto from './dtos/dataFetcherQuery.dto';
+import { DataFetcherQueryDto } from './dtos/dataFetcherQuery.dto';
 import { Order } from '../../../../../shared/src/entities/order.entity';
-import DataFetcherService from './dataFetcher.service';
+import { DataFetcherService } from './dataFetcher.service';
 
 @Controller()
-export default class DataFetcherController {
+export class DataFetcherController {
   constructor(private readonly dataFetcherService: DataFetcherService) {}
 
   @Get('load')

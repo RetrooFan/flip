@@ -1,4 +1,4 @@
-export default class DataFacilitatorQueryDto {
+export class DataFacilitatorQueryDto {
   _page: number;
   _limit: number;
 }

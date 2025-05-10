@@ -1,6 +1,4 @@
-enum DbConnection {
+export enum DbConnection {
   DataFetcher = 'DataFetcher',
   DataFacilitator = 'DataFacilitator',
 }
-
-export default DbConnection;

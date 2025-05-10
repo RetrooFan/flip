@@ -1,4 +1,4 @@
-export default class DataFetcherQueryDto {
+export class DataFetcherQueryDto {
   startPage: number;
   endPage: number;
 }
