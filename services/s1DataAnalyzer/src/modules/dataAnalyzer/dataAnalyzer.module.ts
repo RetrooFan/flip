@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AmountOfOrders, amountOfOrdersSchema } from '../../../../../shared/src/entities/amountOfOrders.entity';
-import { ProductMetric, productMetricSchema } from '../../../../../shared/src/entities/productMetric.entity';
+import { MetricsOfProduct, MetricsOfProductSchema } from '../../../../../shared/src/entities/metricsOfProduct.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
 import { AxiosModule } from '../../../../../shared/src/modules/axios/axios.module';
 import { CronModule } from '../../../../../shared/src/modules/cron/cron.module';
@@ -21,8 +21,8 @@ import { DataAnalyzerService } from './dataAnalyzer.service';
     MongooseModule.forFeature(
       [
         {
-          name: ProductMetric.name,
-          schema: productMetricSchema,
+          name: MetricsOfProduct.name,
+          schema: MetricsOfProductSchema,
         },
         {
           name: AmountOfOrders.name,

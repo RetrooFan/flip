@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type OrderDocument = ProductMetric & Document;
+export type OrderDocument = MetricsOfProduct & Document;
 
 @Schema({ timestamps: true })
-export class ProductMetric {
+export class MetricsOfProduct {
   @Prop({ required: true, unique: true })
   name: string;
 
@@ -21,4 +21,4 @@ export class ProductMetric {
   orderCountYesterday: number;
 }
 
-export const productMetricSchema = SchemaFactory.createForClass(ProductMetric);
+export const MetricsOfProductSchema = SchemaFactory.createForClass(MetricsOfProduct);
