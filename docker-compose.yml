@@ -22,6 +22,18 @@ services:
     command: bash -c "
       npm i --only=${NODE_ENV} &&
       npm run ${NODE_ENV}"
+    depends_on:
+      - mongo
+  mongo:
+    container_name: flip-${NODE_ENV}-mongo
+    image: mongo:5.0.10
+    tty: true
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo:/data/db
 volumes:
   s0DataProvider:
     name: flip-${NODE_ENV}-s0DataProvider
+  mongo:
+    name: flip-${NODE_ENV}-mongo
