@@ -16,6 +16,5 @@ export class DataFacilitatorService {
 
     return await this.orderModel.find().skip(skipItemsNumber).limit(getOrdersQueryDto._limit).sort({ date: 1 });
 
-    return await this.orderModel.find().skip(skipItemsNumber).limit(dataFacilitatorQueryDto._limit).sort({ date: 1 });
   }
 }
