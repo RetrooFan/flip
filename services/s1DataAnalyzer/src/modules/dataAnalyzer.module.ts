@@ -1,4 +1,9 @@
 import { Module } from '@nestjs/common';
+import { DataAnalyzerService } from './dataAnalyzer.service';
 
-@Module({})
+@Module({
+  imports: [],
+  controllers: [],
+  providers: [DataAnalyzerService],
+})
 export class DataAnalyzerModule {}
