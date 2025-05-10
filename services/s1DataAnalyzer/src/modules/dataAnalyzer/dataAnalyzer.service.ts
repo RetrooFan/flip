@@ -23,7 +23,7 @@ export class DataAnalyzerService {
     private readonly amountOfOrdersModel: Model<AmountOfOrdersDocument>,
     private readonly configService: ConfigService,
     @InjectModel(MetricsOfProduct.name, DbConnection.DataAnalyzer)
-    private readonly metricsOfProduct: Model<MetricsOfProductDocument>,
+    private readonly metricsOfProductModel: Model<MetricsOfProductDocument>,
     private readonly consoleLogger: ConsoleLogger,
   ) {
     this.addCronJobs();
@@ -61,7 +61,7 @@ export class DataAnalyzerService {
 
     for (let i = counter; i < data.length; i++) {
       for (const item of data[i].items) {
-        let metricsOfProduct = await this.metricsOfProduct.findById<MetricsOfProduct>(item.product.id);
+        let metricsOfProduct = await this.metricsOfProductModel.findById<MetricsOfProduct>(item.product.id);
 
         if (metricsOfProduct) {
           metricsOfProduct.salesValue += item.quantity * item.product.price;
@@ -76,7 +76,7 @@ export class DataAnalyzerService {
           };
         }
 
-        new this.metricsOfProduct(metricsOfProduct).save();
+        new this.metricsOfProductModel(metricsOfProduct).save();
       }
     }
 
