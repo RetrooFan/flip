@@ -7,7 +7,7 @@ async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
   app.useGlobalFilters(new FlipExceptionFilter(app));
   const configService = app.get<ConfigService>(ConfigService);
-  const port = configService.get('port');
+  const port = configService.get<number>('port');
   await app.listen(port);
 }
 
