@@ -1,9 +1,13 @@
 {
   "name": "s0-data-provider",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
   "main": "dist/services/s0DataProvider/src/main.js",
   "scripts": {
-    "build:clean": "rimraf dist",
-    "prebuild": "npm run build:clean",
+    "prebuild": "rimraf dist",
     "build": "tsc",
     "preprod": "npm run build",
     "prod": "node .",
