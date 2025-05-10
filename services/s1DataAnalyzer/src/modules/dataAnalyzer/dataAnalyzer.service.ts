@@ -58,7 +58,7 @@ export class DataAnalyzerService {
       if (!orderCountDate) {
         new this.orderCountDateModel({ value }).save();
       } else if (orderCountDate.value !== value) {
-        await this.orderCountReset();
+        await this.orderCountReset(value);
         new this.orderCountDateModel({ value }).save();
       }
 
@@ -92,7 +92,7 @@ export class DataAnalyzerService {
     this.consoleLogger.log(message, DataAnalyzerService.name);
   }
 
-  private async orderCountReset(): Promise<void> {
+  private async orderCountReset(date: string): Promise<void> {
     const metricsOfProducts = await this.metricsOfProductModel.find<MetricsOfProduct>();
 
     for (const metricsOfProduct of metricsOfProducts) {
@@ -102,6 +102,6 @@ export class DataAnalyzerService {
       await new this.metricsOfProductModel(metricsOfProduct).save();
     }
 
-    this.consoleLogger.log('Order counts reseted', DataAnalyzerService.name);
+    this.consoleLogger.log(`Order counts reseted, current date: ${date}`, DataAnalyzerService.name);
   }
 }
