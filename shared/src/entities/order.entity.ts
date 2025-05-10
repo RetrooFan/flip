@@ -14,7 +14,7 @@ export class Order {
   customer: Customer;
 
   @Prop({ required: true })
-  item: Item;
+  items: Item[];
 }
 
 export const orderSchema = SchemaFactory.createForClass(Order);
