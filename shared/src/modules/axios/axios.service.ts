@@ -19,15 +19,11 @@ export class AxiosService {
     }
   }
 
-  getAxios(): Axios {
-    return this.axios;
-  }
-
   public async request<T = unknown>(options: AxiosRequestConfig): Promise<T> {
     const startTime = Date.now();
 
     try {
-      const result = await this.getAxios().request<T>(options);
+      const result = await this.axios.request<T>(options);
       const duration = Date.now() - startTime;
 
       this.consoleLogger.log(
