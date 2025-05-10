@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type OrderDocument = MetricsOfProduct & Document;
+export type MetricsOfProductDocument = MetricsOfProduct & Document;
 
 @Schema({ timestamps: true })
 export class MetricsOfProduct {
