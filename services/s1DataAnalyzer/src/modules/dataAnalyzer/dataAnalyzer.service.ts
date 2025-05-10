@@ -20,6 +20,8 @@ import { S1DataAnalyzerUnknownError } from '../../errors/s1DataAnalyzer.error';
 
 @Injectable()
 export class DataAnalyzerService {
+  private analysisRunning = false;
+
   constructor(
     private readonly cronService: CronService,
     private readonly axiosService: AxiosService,
@@ -37,8 +39,21 @@ export class DataAnalyzerService {
 
   private addCronJobs(): void {
     this.cronService.addJob('DATA_ANALYZER_CRON_TIME', this.configService.get<string>('dataAnalyzerCronTime'), () =>
-      errorRethrower(this.dataAnalyzerCronCallback(), S1DataAnalyzerUnknownError),
+      errorRethrower(this.ensureAnalysisRunningReseted(), S1DataAnalyzerUnknownError),
     );
+  }
+
+  private async ensureAnalysisRunningReseted(): Promise<void> {
+    if (this.analysisRunning) return;
+    this.analysisRunning = true;
+
+    try {
+      await this.dataAnalyzerCronCallback();
+    } catch (error) {
+      throw error;
+    } finally {
+      this.analysisRunning = false;
+    }
   }
 
   private async dataAnalyzerCronCallback(): Promise<void> {
