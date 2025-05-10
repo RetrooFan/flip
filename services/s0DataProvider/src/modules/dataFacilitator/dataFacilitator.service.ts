@@ -15,6 +15,6 @@ export class DataFacilitatorService {
   public async getOrders(dataFacilitatorQueryDto: DataFacilitatorQueryDto): Promise<Order[]> {
     const skipItemsNumber = dataFacilitatorQueryDto._limit * (dataFacilitatorQueryDto._page - 1);
 
-    return await this.orderModel.find().skip(skipItemsNumber).limit(dataFacilitatorQueryDto._limit);
+    return await this.orderModel.find().skip(skipItemsNumber).limit(dataFacilitatorQueryDto._limit).sort({ date: 1 });
   }
 }
