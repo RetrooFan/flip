@@ -21,8 +21,5 @@
     ".eslintrc.js",
     "services",
     "shared"
-  ],
-  "exclude": [
-    "shared/test"
   ]
 }
