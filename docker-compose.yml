@@ -25,6 +25,31 @@ services:
       npm run ${NODE_ENV}"
     depends_on:
       - mongo
+  s1DataAnalyzer:
+    container_name: flip-${NODE_ENV}-s1DataAnalyzer
+    image: node:18.7.0
+    working_dir: /app
+    tty: true
+    ports:
+      - ${S1_DATA_ANALYZER_PORT}:80
+      - ${S1_DATA_ANALYZER_PORT_DEBUGGER}:9229
+    volumes:
+      - s1DataAnalyzer:/app
+      - ./services/s1DataAnalyzer/src:/app/services/s1DataAnalyzer/src:ro
+      - ./shared:/app/shared:ro
+      - ./nodemon.json:/app/nodemon.json:ro
+      - ./services/s1DataAnalyzer/package-lock.json:/app/package-lock.json
+      - ./services/s1DataAnalyzer/package.json:/app/package.json
+      - ./services/s1DataAnalyzer/.env:/app/.env:ro
+      - ./tsconfig.json:/app/tsconfig.json:ro
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      PORT: 80
+    command: bash -c "
+      npm i --only=${NODE_ENV} &&
+      npm run ${NODE_ENV}"
+    depends_on:
+      - mongo
   mongo:
     container_name: flip-${NODE_ENV}-mongo
     image: mongo:5.0.10
@@ -36,5 +61,7 @@ services:
 volumes:
   s0DataProvider:
     name: flip-${NODE_ENV}-s0DataProvider
+  s1DataAnalyzer:
+    name: flip-${NODE_ENV}-s1DataAnalyzer
   mongo:
     name: flip-${NODE_ENV}-mongo
