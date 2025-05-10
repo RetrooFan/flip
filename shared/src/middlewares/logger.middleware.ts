@@ -1,17 +1,24 @@
+import { ConsoleLogger, Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 
-let counter = 0;
+@Injectable()
+export class LoggerMiddleware implements NestMiddleware {
+  public static routes = ['*'];
+  private counter = 0;
 
-export function loggerMiddleware(req: Request, res: Response, next: NextFunction): void {
-  const request = {
-    method: req.method,
-    url: req.url.split('?')[0],
-    query: req.query,
-    params: req.params,
-    ip: req.ip,
-  };
+  constructor(private readonly consoleLogger: ConsoleLogger) {}
 
-  console.log('Incoming request', counter++, request, '\n');
+  use(req: Request, res: Response, next: NextFunction): void {
+    const request = {
+      method: req.method,
+      url: req.url.split('?')[0],
+      query: req.query,
+      params: req.params,
+      ip: req.ip,
+    };
 
-  next();
+    console.log('Incoming request', this.counter++, request, '\n');
+
+    next();
+  }
 }
