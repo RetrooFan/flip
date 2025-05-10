@@ -11,13 +11,15 @@ export class LoggerMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction): void {
     const request = {
       method: req.method,
-      url: req.url.split('?')[0],
-      query: req.query,
+      url: req.baseUrl,
+      headers: req.headers,
       params: req.params,
+      query: req.query,
+      body: req.body,
       ip: req.ip,
     };
 
-    console.log('Incoming request', this.counter++, request, '\n');
+    this.consoleLogger.log(`Incoming request: ${this.counter++}`, request, LoggerMiddleware.name);
 
     next();
   }
