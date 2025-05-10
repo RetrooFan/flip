@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 let counter = 0;
 
-export function logger(req: Request, res: Response, next: NextFunction): void {
+export function loggerMiddleware(req: Request, res: Response, next: NextFunction): void {
   const request = {
     method: req.method,
     url: req.url.split('?')[0],
