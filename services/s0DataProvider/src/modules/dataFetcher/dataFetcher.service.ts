@@ -1,6 +1,6 @@
 import { ConsoleLogger, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { AxiosResponse, AxiosStatic } from 'axios';
+import { AxiosStatic } from 'axios';
 import { Response } from 'express';
 import { Model } from 'mongoose';
 import { DataFetcherQueryDto } from '../../../../../shared/src/dtos/dataFetcherParams.dto';
