@@ -11,7 +11,7 @@ export class DataFacilitatorController {
   constructor(private readonly dataFacilitatorService: DataFacilitatorService) {}
 
   @Get('orders')
-  private async gerOrders(
+  private async getOrders(
     @Query('_page', ParseIntPipe) _page: number,
     @Query('_limit', ParseIntPipe) _limit: number,
   ): Promise<Order[]> {
