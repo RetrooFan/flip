@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
-import { AxiosStatic } from 'axios';
 import { Model } from 'mongoose';
 import { LastOrder, LastOrderDocument } from '../../../../../shared/src/entities/lastOrder.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
@@ -12,17 +11,15 @@ import { S1DataAnalyzerUnknownError } from '../../errors/s1DataAnalyzer.error';
 
 @Injectable()
 export class DataAnalyzerService {
-  private readonly axiosInstance: AxiosStatic;
   private message = 'BLA';
 
   constructor(
     private readonly cronService: CronService,
-    axiosService: AxiosService,
+    private readonly axiosService: AxiosService,
     @InjectModel(LastOrder.name, DbConnection.DataAnalyzer)
     private readonly lastOrderModel: Model<LastOrderDocument>,
     private readonly configService: ConfigService,
   ) {
-    this.axiosInstance = axiosService.getAxios();
     this.addCronJobs();
   }
 
