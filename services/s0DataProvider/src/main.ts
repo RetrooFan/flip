@@ -5,7 +5,7 @@ import { loggerMiddleware } from '../../../shared/src/middlewares/logger.middlew
 import { AppModule } from './app.module';
 
 async function bootstrap(): Promise<void> {
-  console.log(`Container name: ${process.env.npm_package_name}`);
+  console.log(`\nPackage name: ${process.env.npm_package_name}`);
 
   const app = await NestFactory.create(AppModule);
   const configService = app.get<ConfigService>(ConfigService);
