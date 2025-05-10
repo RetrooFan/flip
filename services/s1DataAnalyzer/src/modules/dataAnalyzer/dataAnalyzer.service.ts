@@ -9,11 +9,11 @@ export class DataAnalyzerService {
 
   constructor(cronService: CronService) {
     cronService.addJob('DATA_ANALYZER_CRON_TIME', process.env.DATA_ANALYZER_CRON_TIME, () =>
-      errorRethrower(this.analyzeData(), S1DataAnalyzerUnknownError),
+      errorRethrower(this.dataAnalyzerCronCallback(), S1DataAnalyzerUnknownError),
     );
   }
 
-  public async analyzeData(): Promise<void> {
+  private async dataAnalyzerCronCallback(): Promise<void> {
     console.log(this.message, DataAnalyzerService.name);
   }
 }
