@@ -5,6 +5,9 @@ export type MetricsOfProductDocument = MetricsOfProduct & Document;
 
 @Schema({ timestamps: true })
 export class MetricsOfProduct {
+  @Prop({ required: true, alias: 'id' })
+  _id: string;
+
   @Prop({ required: true, unique: true })
   name: string;
 
