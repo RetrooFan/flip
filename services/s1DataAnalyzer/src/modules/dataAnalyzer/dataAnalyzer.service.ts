@@ -100,8 +100,8 @@ export class DataAnalyzerService {
       await new this.amountOfAnalyzedOrdersModel(amountOfAnalyzedOrders).save();
     }
 
-    const message = `Analyzed ${data.length - counter} orders. Analyzed in total: ${value}`;
-    this.consoleLogger.log(message, DataAnalyzerService.name);
+    const logMessage = `Analyzed ${data.length - counter} orders. Analyzed in total: ${value}`;
+    this.consoleLogger.log(logMessage, DataAnalyzerService.name);
   }
 
   private async orderCountReset(date: string): Promise<void> {
