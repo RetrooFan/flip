@@ -74,7 +74,7 @@ export class DataFetcherService {
 
       const message = `Loaded page ${i} (${data.length} items)`;
       this.consoleLogger.log(
-        `${message} - ${Math.round(((i - startPage + 1) * 100) / pagesNumber)} %`,
+        `${message} - ${Math.round(((i - startPage + 1) * 100) / pagesNumber)} %\n`,
         DataFetcherService.name,
       );
 
@@ -107,11 +107,11 @@ export class DataFetcherService {
     }
 
     if (rejectedCounter) {
-      this.consoleLogger.error(`Rejected requests: ${rejectedCounter}`, DataFetcherService.name);
+      this.consoleLogger.error(`Failed records: ${rejectedCounter}`, DataFetcherService.name);
     }
 
     if (fulfilledCounter) {
-      this.consoleLogger.log(`Fulfilled requests: ${fulfilledCounter}`, DataFetcherService.name);
+      this.consoleLogger.log(`Saved records: ${fulfilledCounter}`, DataFetcherService.name);
     }
   }
 }
