@@ -17,7 +17,7 @@ The project contains of 3 microservices in 3 separate docker containers.
 This service acts as a data provider.</br>
 In real life we would receive new orders in a chronological order,
 so i decided to create a service responsible for providing data,
-because data from [DataSource API](https://recruitment-api.dev.flipfit.io/orders?_page=1&_limit=100) are not sorted.</br>
+because data from [DataSource API](https://recruitment-api.dev.flipfit.io/orders?_page=1&_limit=100) is not sorted.</br>
 The purpose of this service is to load all data from DataSource API, sort it and then serve it in a controllable way (described below).</br>
 This service uses only `flipS0DataProvider` MongoDB database.
 
