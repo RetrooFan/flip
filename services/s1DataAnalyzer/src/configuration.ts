@@ -8,7 +8,6 @@ export default (): ConfigObject => {
     dataAnalyzerCronTime: process.env.DATA_ANALYZER_CRON_TIME,
     mongoDbUriFlip: process.env.MONGODB_URI_FLIP.replace('?????', process.env.NODE_ENV),
     productYesterdayCounterTime: process.env.PRODUCT_YESTERDAY_COUNTER_TIME,
-    redisUrl: process.env.REDIS_URL,
-    redisPort: parseInt(process.env.REDIS_PORT),
+    redisUrl: process.env.REDIS_URL.replace('?????', process.env.NODE_ENV),
   };
 };

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import Redis, { RedisOptions } from 'ioredis';
 import { BullModuleOptions } from '@nestjs/bull';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class RedisService {
@@ -8,8 +9,8 @@ export class RedisService {
   private readonly redisQueueClient: Redis;
   private readonly redisQueueSubscriber: Redis;
 
-  constructor() {
-    this.redisUrl = `${process.env.REDIS_URL}-${process.env.NODE_ENV}-redis:${process.env.REDIS_PORT}`;
+  constructor(private readonly configService: ConfigService) {
+    this.redisUrl = this.configService.get<string>('redisUrl');
     this.redisQueueClient = new Redis(this.redisUrl, getRedisConnectionConfig());
     this.redisQueueSubscriber = new Redis(this.redisUrl, getRedisConnectionConfig());
   }
