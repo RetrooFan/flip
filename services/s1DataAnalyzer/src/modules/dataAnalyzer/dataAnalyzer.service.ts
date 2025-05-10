@@ -54,7 +54,7 @@ export class DataAnalyzerService {
     for (let i = counter; i < data.length; i++) {}
 
     if (value > currentValue && data.length) {
-      new this.amountOfOrdersModel({ value }).save();
+      await new this.amountOfOrdersModel({ value }).save();
     }
   }
 
