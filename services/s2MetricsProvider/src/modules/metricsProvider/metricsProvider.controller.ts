@@ -8,22 +8,16 @@ export class MetricsProviderController {
 
   @Get('top10SalesValue')
   private async top10SalesValue(): Promise<Product[]> {
-    this.metricsProviderService;
-
-    return [];
+    return this.metricsProviderService.top10SalesValue();
   }
 
   @Get('top10OrderCount')
   private async top10OrderCount(): Promise<Product[]> {
-    this.metricsProviderService;
-
-    return [];
+    return this.metricsProviderService.top10OrderCount();
   }
 
   @Get('top10OrderCountYesterday')
   private async top10OrderCountYesterday(): Promise<Product[]> {
-    this.metricsProviderService;
-
-    return [];
+    return this.metricsProviderService.top10OrderCountYesterday();
   }
 }
