@@ -42,9 +42,13 @@ export class DataAnalyzerService {
   }
 
   private async dataAnalyzerCronCallback(): Promise<void> {
-    const amountOfAnalyzedOrders = await this.amountOfAnalyzedOrdersModel.findOne<AmountOfAnalyzedOrders>();
-    const currentValue = amountOfAnalyzedOrders ? amountOfAnalyzedOrders.value : 0;
+    let amountOfAnalyzedOrders = await this.amountOfAnalyzedOrdersModel.findOne<AmountOfAnalyzedOrders>();
 
+    if (!amountOfAnalyzedOrders) {
+      amountOfAnalyzedOrders = await new this.amountOfAnalyzedOrdersModel({ value: 0 }).save();
+    }
+
+    const currentValue = amountOfAnalyzedOrders ? amountOfAnalyzedOrders.value : 0;
     const limit = this.configService.get<number>('itemsNumberQueryLimit');
     const page = Math.trunc(currentValue / limit) + 1;
 
@@ -91,7 +95,8 @@ export class DataAnalyzerService {
     }
 
     if (value > currentValue && data.length) {
-      await new this.amountOfAnalyzedOrdersModel({ value }).save();
+      amountOfAnalyzedOrders.value = value;
+      await new this.amountOfAnalyzedOrdersModel(amountOfAnalyzedOrders).save();
     }
 
     const message = `Analyzed ${data.length - counter} orders. Analyzed in total: ${value}`;
