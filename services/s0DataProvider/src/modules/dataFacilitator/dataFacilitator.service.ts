@@ -18,13 +18,25 @@ export class DataFacilitatorService {
     private readonly dateEntityModel: Model<DateEntityDocument>,
   ) {
     this.date = new Date('2000-01-01');
+
+  public async onModuleInit(): Promise<void> {
+    const dateEntity = await this.dateEntityModel.findOne<DateEntity>();
+
+    if (!dateEntity) {
+      const value = new Date('2000-01-01');
+      new this.dateEntityModel({ value }).save();
+
+      return;
+    }
   }
 
   public async getOrders(getOrdersQueryDto: GetOrdersQueryDto): Promise<Order[]> {
     const skipItemsNumber = getOrdersQueryDto._limit * (getOrdersQueryDto._page - 1);
 
+    const date = await this.dateEntityModel.findOne<DateEntity>();
+
     return await this.orderModel
-      .find<Order>({ date: { $lte: this.date } })
+      .find<Order>({ date: { $lte: date.value } })
       .skip(skipItemsNumber)
       .limit(getOrdersQueryDto._limit)
       .sort({ date: 1 });
