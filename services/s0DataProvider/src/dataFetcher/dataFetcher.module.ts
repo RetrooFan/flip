@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { orderSchema, orderToken } from '../../../../shared/src/entities/order.entity';
 import { DbConnection } from '../../../../shared/src/enums/dbConnection.enum';
+import { DataFetcherController } from './dataFetcher.controller';
+import { DataFetcherService } from './dataFetcher.service';
 
 @Module({
   imports: [
@@ -21,7 +23,7 @@ import { DbConnection } from '../../../../shared/src/enums/dbConnection.enum';
       DbConnection.DataFetcher,
     ),
   ],
-  controllers: [],
-  providers: [],
+  controllers: [DataFetcherController],
+  providers: [DataFetcherService],
 })
 export class DataFetcherModule {}
