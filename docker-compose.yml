@@ -51,7 +51,6 @@ services:
       npm run ${NODE_ENV}"
     depends_on:
       - mongo
-      - redis
 
   mongo:
     container_name: flip-${NODE_ENV}-mongo
