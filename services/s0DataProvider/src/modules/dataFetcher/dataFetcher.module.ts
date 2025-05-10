@@ -1,7 +1,8 @@
-import { Module } from '@nestjs/common';
+import { ConsoleLogger, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { orderSchema, orderToken } from '../../../../../shared/src/entities/order.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
+import { AxiosModule } from '../../../../../shared/src/modules/axios/axios.module';
 import { DataFetcherController } from './dataFetcher.controller';
 import { DataFetcherService } from './dataFetcher.service';
 
@@ -22,8 +23,9 @@ import { DataFetcherService } from './dataFetcher.service';
       ],
       DbConnection.DataFetcher,
     ),
+    AxiosModule,
   ],
   controllers: [DataFetcherController],
-  providers: [DataFetcherService],
+  providers: [DataFetcherService, ConsoleLogger],
 })
 export class DataFetcherModule {}
