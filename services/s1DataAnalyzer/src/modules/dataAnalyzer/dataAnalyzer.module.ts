@@ -21,12 +21,12 @@ import { DataAnalyzerService } from './dataAnalyzer.service';
     MongooseModule.forFeature(
       [
         {
-          name: MetricsOfProduct.name,
-          schema: MetricsOfProductSchema,
-        },
-        {
           name: AmountOfOrders.name,
           schema: amountOfOrdersSchema,
+        },
+        {
+          name: MetricsOfProduct.name,
+          schema: MetricsOfProductSchema,
         },
       ],
       DbConnection.DataAnalyzer,
