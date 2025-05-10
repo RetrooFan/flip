@@ -2,7 +2,7 @@ version: "3.2"
 services:
   s0DataProvider:
     container_name: flip-${NODE_ENV}-s0DataProvider
-    image: node:17.1.0
+    image: node:18.7.0
     working_dir: /app
     tty: true
     ports:
