@@ -4,7 +4,7 @@ import * as request from 'supertest';
 import { HelloModule } from '../../../shared/src/modules/hello/hello.module';
 import { ConfigModule, ConfigObject } from '@nestjs/config';
 
-describe('AppController (e2e)', () => {
+describe('HelloModule (e2e)', () => {
   let app: INestApplication;
   let api: request.SuperTest<request.Test>;
 
