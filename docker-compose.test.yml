@@ -1,0 +1,37 @@
+version: "3.2"
+services:
+  node-test:
+    container_name: flip-test-node
+    image: node:18.7.0
+    working_dir: /app
+    tty: true
+    ports:
+      - ${DEBUGGER_PORT}:9229
+    volumes:
+      - node:/app
+      - ./services:/app/services:ro
+      - ./shared:/app/shared:ro
+      - ./.eslintrc.js:/app/.eslintrc.js:ro
+      - ./.prettierrc:/app/.prettierrc:ro
+      - ./package-lock.json:/app/package-lock.json
+      - ./package.json:/app/package.json
+      - ./tsconfig.eslint.json:/app/tsconfig.eslint.json:ro
+      - ./tsconfig.json:/app/tsconfig.json:ro
+    command: bash -c "
+      npm i --only=prod &&
+      npm run lint:${SERVICE} &&
+      npm run jest:${SERVICE}"
+    depends_on:
+      - mongo-test
+
+  mongo-test:
+    container_name: flip-test-mongo
+    image: mongo:5.0.10
+    tty: true
+    volumes:
+      - mongo:/data/db
+volumes:
+  node:
+    name: flip-test-node
+  mongo:
+    name: flip-test-mongo
