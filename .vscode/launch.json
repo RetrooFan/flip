@@ -17,6 +17,16 @@
     {
       "type": "node",
       "request": "attach",
+      "name": "s1DataAnalyzer container",
+      "port": 4001,
+      "restart": true,
+      "sourceMapPathOverrides": {
+        "/home/node/*": "${workspaceRoot}/*"
+      }
+    },
+    {
+      "type": "node",
+      "request": "attach",
       "name": "All tests container",
       "restart": true,
       "sourceMapPathOverrides": {
