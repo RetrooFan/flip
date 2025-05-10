@@ -94,7 +94,7 @@ export class DataAnalyzerService {
       await new this.amountOfAnalyzedOrdersModel({ value }).save();
     }
 
-    const message = `Analyzed ${data.length - counter} orders`;
+    const message = `Analyzed ${data.length - counter} orders. Analyzed in total: ${value}`;
     this.consoleLogger.log(message, DataAnalyzerService.name);
   }
 
