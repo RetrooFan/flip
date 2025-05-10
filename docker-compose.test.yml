@@ -21,17 +21,7 @@ services:
       npm i --only=prod &&
       npm run lint:${SERVICE} &&
       npm run jest:${SERVICE}"
-    depends_on:
-      - mongo-test
 
-  mongo-test:
-    container_name: flip-test-mongo
-    image: mongo:5.0.10
-    tty: true
-    volumes:
-      - mongo:/data/db
 volumes:
   node:
     name: flip-test-node
-  mongo:
-    name: flip-test-mongo
