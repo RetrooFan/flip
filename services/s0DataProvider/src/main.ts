@@ -4,6 +4,7 @@ import { FlipExceptionFilter } from '../../../shared/src/exceptionFilters/flipEx
 import { AppModule } from './app.module';
 
 async function bootstrap(): Promise<void> {
+  console.log(process.env.npm_package_name);
   const app = await NestFactory.create(AppModule);
   app.useGlobalFilters(new FlipExceptionFilter(app));
   const configService = app.get<ConfigService>(ConfigService);
