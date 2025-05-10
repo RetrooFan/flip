@@ -63,3 +63,5 @@ You can also provide unsorted data to this service, but in such case `orderCount
 - [top10SalesValue](http://localhost:3002/top10SalesValue)
 - [top10OrderCount](http://localhost:3002/top10OrderCount)
 - [top10OrderCountYesterday](http://localhost:3002/top10OrderCountYesterday)
+
+6. Tests may be run simply by `npm test`. I created whole setup, but abandoned implementing tests due to lack of the time.
