@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { LastOrder, lastOrderSchema } from '../../../../../shared/src/entities/lastOrder.entity';
 import { ProductMetric, productMetricSchema } from '../../../../../shared/src/entities/productMetric.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
 import { CronModule } from '../../../../../shared/src/modules/cron/cron.module';
@@ -18,6 +19,10 @@ import { DataAnalyzerService } from './dataAnalyzer.service';
         {
           name: ProductMetric.name,
           schema: productMetricSchema,
+        },
+        {
+          name: LastOrder.name,
+          schema: lastOrderSchema,
         },
       ],
       DbConnection.DataAnalyzer,

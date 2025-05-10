@@ -1,4 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { LastOrder, LastOrderDocument } from '../../../../../shared/src/entities/lastOrder.entity';
+import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
 import { CronService } from '../../../../../shared/src/modules/cron/cron.service';
 import { errorRethrower } from '../../../../../shared/src/utils';
 import { S1DataAnalyzerUnknownError } from '../../errors/s1DataAnalyzer.error';
@@ -7,7 +11,11 @@ import { S1DataAnalyzerUnknownError } from '../../errors/s1DataAnalyzer.error';
 export class DataAnalyzerService {
   private message = 'BLA';
 
-  constructor(private readonly cronService: CronService) {
+  constructor(
+    private readonly cronService: CronService,
+    @InjectModel(LastOrder.name, DbConnection.DataAnalyzer)
+    private readonly orderModel: Model<LastOrderDocument>,
+  ) {
     this.addCronJobs();
   }
 
