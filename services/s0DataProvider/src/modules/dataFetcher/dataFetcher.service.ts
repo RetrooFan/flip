@@ -1,7 +1,6 @@
-import { ConsoleLogger, HttpStatus, Injectable } from '@nestjs/common';
+import { ConsoleLogger, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { AxiosStatic } from 'axios';
-import { Response } from 'express';
 import { Model } from 'mongoose';
 import { DataFetcherQueryDto } from './dtos/dataFetcherQuery.dto';
 import { Order, OrderDocument } from '../../../../../shared/src/entities/order.entity';
@@ -23,9 +22,7 @@ export class DataFetcherService {
     this.axiosInstance = axiosService.getAxios();
   }
 
-  public async loadData(response: Response, dataFetcherQueryDto: DataFetcherQueryDto): Promise<void> {
-    response.status(HttpStatus.OK).send('Data loading started!');
-
+  public async loadData(dataFetcherQueryDto: DataFetcherQueryDto): Promise<void> {
     const orders = await this.fetchData(dataFetcherQueryDto.startPage, dataFetcherQueryDto.endPage);
 
     await this.saveData(orders);
