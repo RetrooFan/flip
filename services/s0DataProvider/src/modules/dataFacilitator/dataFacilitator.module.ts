@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Order, orderSchema } from '../../../../../shared/src/entities/order.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
-import { DataFacilitatorController } from './dataFacilitator.controller';
-import { DataFacilitatorService } from './dataFacilitator.service';
+import DataFacilitatorController from './dataFacilitator.controller';
+import DataFacilitatorService from './dataFacilitator.service';
 
 @Module({
   imports: [
@@ -26,4 +26,4 @@ import { DataFacilitatorService } from './dataFacilitator.service';
   controllers: [DataFacilitatorController],
   providers: [DataFacilitatorService],
 })
-export class DataFacilitatorModule {}
+export default class DataFacilitatorModule {}

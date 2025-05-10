@@ -3,8 +3,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Order, orderSchema } from '../../../../../shared/src/entities/order.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
 import { AxiosModule } from '../../../../../shared/src/modules/axios/axios.module';
-import { DataFetcherController } from './dataFetcher.controller';
-import { DataFetcherService } from './dataFetcher.service';
+import DataFetcherController from './dataFetcher.controller';
+import DataFetcherService from './dataFetcher.service';
 
 @Module({
   imports: [
@@ -28,4 +28,4 @@ import { DataFetcherService } from './dataFetcher.service';
   controllers: [DataFetcherController],
   providers: [DataFetcherService, ConsoleLogger],
 })
-export class DataFetcherModule {}
+export default class DataFetcherModule {}
