@@ -24,7 +24,9 @@ export class DataFetcherService {
   public async loadData(response: Response, dataFetcherQueryDto: DataFetcherQueryDto): Promise<void> {
     response.status(HttpStatus.OK).send('Data loading started!');
 
-    await this.fetchData(dataFetcherQueryDto.startPage, dataFetcherQueryDto.endPage);
+    const orders = await this.fetchData(dataFetcherQueryDto.startPage, dataFetcherQueryDto.endPage);
+
+    await this.saveData(orders);
   }
 
   private async fetchData(startPage: number, endPage: number): Promise<Order[]> {
@@ -59,5 +61,48 @@ export class DataFetcherService {
     }
 
     return orders;
+  }
+
+  private async saveData(orders: Order[]): Promise<void> {
+    const promises = [];
+
+    orders.forEach((order) => {
+      promises.push(new this.orderModel(order).save());
+    });
+
+    const results = await Promise.allSettled<Order>(promises);
+    let rejectedCounter = 0;
+    let fulfilledCounter = 0;
+
+    results.forEach((result) => {
+      if (isRejected(result)) {
+        rejectedCounter++;
+        this.consoleLogger.error(result.reason, 'DataFetcherService');
+      }
+
+      if (isFulfilled(result)) {
+        fulfilledCounter++;
+      }
+    });
+
+    if (rejectedCounter) {
+      this.consoleLogger.error(`Rejected requests: ${rejectedCounter}`, 'DataFetcherService');
+    }
+
+    if (fulfilledCounter) {
+      this.consoleLogger.log(`Fulfilled requests: ${fulfilledCounter}`, 'DataFetcherService');
+    }
+  }
+}
+
+function isFulfilled(result: PromiseSettledResult<Order>): result is PromiseRejectedResult {
+  if (result.status === 'fulfilled') {
+    return true;
+  }
+}
+
+function isRejected(result: PromiseSettledResult<Order>): result is PromiseRejectedResult {
+  if (result.status === 'rejected') {
+    return true;
   }
 }
