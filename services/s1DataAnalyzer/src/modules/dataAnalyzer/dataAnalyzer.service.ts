@@ -67,13 +67,15 @@ export class DataAnalyzerService {
 
         if (metricsOfProduct) {
           metricsOfProduct.salesValue += item.quantity * item.product.price;
+          metricsOfProduct.orderCountTotal++;
+          metricsOfProduct.orderCountToday++;
         } else {
           metricsOfProduct = {
             _id: item.product.id,
             name: item.product.name,
             salesValue: item.quantity * item.product.price,
-            orderCountTotal: 0,
-            orderCountToday: 0,
+            orderCountTotal: 1,
+            orderCountToday: 1,
             orderCountYesterday: 0,
           };
         }
@@ -99,5 +101,7 @@ export class DataAnalyzerService {
 
       await new this.metricsOfProductModel(metricsOfProduct).save();
     }
+
+    this.consoleLogger.log('Order counts reseted', DataAnalyzerService.name);
   }
 }
