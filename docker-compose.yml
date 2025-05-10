@@ -15,6 +15,7 @@ services:
       - ./nodemon.json:/app/nodemon.json:ro
       - ./services/s0DataProvider/package-lock.json:/app/package-lock.json
       - ./services/s0DataProvider/package.json:/app/package.json
+      - ./services/s0DataProvider/.env:/app/.env:ro
       - ./tsconfig.json:/app/tsconfig.json:ro
     environment:
       NODE_ENV: ${NODE_ENV}
