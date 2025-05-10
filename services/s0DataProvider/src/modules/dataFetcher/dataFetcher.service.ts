@@ -1,4 +1,4 @@
-import { ConsoleLogger, Injectable } from '@nestjs/common';
+import { ConsoleLogger, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { LoadDataQueryDto } from './dtos/dataFetcherQuery.dto';
@@ -6,11 +6,13 @@ import { Order, OrderDocument } from '../../../../../shared/src/entities/order.e
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
 import { AxiosService } from '../../../../../shared/src/modules/axios/axios.service';
 import { ConfigService } from '@nestjs/config';
+import { Response } from 'express';
 
 @Injectable()
 export class DataFetcherService {
   private stopLoadingFlag: boolean;
   private abortLoadingFlag: boolean;
+  private loadingRunning = false;
 
   constructor(
     private readonly axiosService: AxiosService,
@@ -20,10 +22,8 @@ export class DataFetcherService {
     private readonly configService: ConfigService,
   ) {}
 
-  public async loadData(loadDataQueryDto: LoadDataQueryDto): Promise<void> {
-    const orders = await this.fetchData(loadDataQueryDto.startPage, loadDataQueryDto.endPage);
-
-    await this.saveData(orders);
+  public async loadData(response: Response, loadDataQueryDto: LoadDataQueryDto): Promise<void> {
+    await this.ensureLoadingRunningReseted(response, loadDataQueryDto);
   }
 
   public async stopLoading(): Promise<string> {
@@ -113,6 +113,27 @@ export class DataFetcherService {
 
     if (fulfilledCounter) {
       this.consoleLogger.log(`Saved records: ${fulfilledCounter}`, DataFetcherService.name);
+    }
+  }
+
+  private async ensureLoadingRunningReseted(response: Response, loadDataQueryDto: LoadDataQueryDto): Promise<void> {
+    if (this.loadingRunning) {
+      response.status(HttpStatus.OK).send('Data loading currently running! Not started!');
+
+      return;
+    }
+    this.loadingRunning = true;
+
+    response.status(HttpStatus.OK).send('Data loading started!');
+
+    try {
+      const orders = await this.fetchData(loadDataQueryDto.startPage, loadDataQueryDto.endPage);
+
+      await this.saveData(orders);
+    } catch (error) {
+      throw error;
+    } finally {
+      this.loadingRunning = false;
     }
   }
 }

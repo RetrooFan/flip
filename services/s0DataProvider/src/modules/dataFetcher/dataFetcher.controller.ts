@@ -1,4 +1,4 @@
-import { Controller, Get, HttpStatus, ParseIntPipe, Query, Res } from '@nestjs/common';
+import { Controller, Get, ParseIntPipe, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { LoadDataQueryDto } from './dtos/dataFetcherQuery.dto';
 import { Order } from '../../../../../shared/src/entities/order.entity';
@@ -18,9 +18,7 @@ export class DataFetcherController {
   ): Promise<void> {
     const loadDataQueryDto: LoadDataQueryDto = { startPage, endPage };
 
-    response.status(HttpStatus.OK).send('Data loading started!');
-
-    await errorRethrower(this.dataFetcherService.loadData(loadDataQueryDto), S0DataProviderUnknownError);
+    await errorRethrower(this.dataFetcherService.loadData(response, loadDataQueryDto), S0DataProviderUnknownError);
   }
 
   @Get('stop')
