@@ -59,16 +59,6 @@ export class DataFetcherService {
     this.abortLoadingFlag = false;
 
     for (let i = startPage; i < endPage + 1; i++) {
-      if (this.stopLoadingFlag) {
-        this.stopLoadingFlag = false;
-        break;
-      }
-
-      if (this.abortLoadingFlag) {
-        this.abortLoadingFlag = false;
-        return [];
-      }
-
       const params = { _page: i, _limit: limit };
 
       let data: Order[];
@@ -88,6 +78,16 @@ export class DataFetcherService {
         `${message} - ${Math.round(((i - startPage + 1) * 100) / pagesNumber)} %`,
         'DataFetcherService',
       );
+
+      if (this.stopLoadingFlag) {
+        this.stopLoadingFlag = false;
+        break;
+      }
+
+      if (this.abortLoadingFlag) {
+        this.abortLoadingFlag = false;
+        return [];
+      }
     }
 
     return orders;
