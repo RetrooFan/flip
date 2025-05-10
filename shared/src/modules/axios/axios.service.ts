@@ -26,26 +26,27 @@ export class AxiosService {
         AxiosService.name,
       );
       this.consoleLogger.log(
-        `Content length: ${result.headers['content-length']}`,
-        'Request details',
+        'Request options',
         options,
+        `Response content length: ${result.headers['content-length']}`,
         AxiosService.name,
       );
 
       return result.data;
     } catch (error) {
       const duration = Date.now() - startTime;
+      const { response } = error;
 
       this.consoleLogger.error(
-        `${error.constructor.name} - Outgoing request: ${error.response.data.statusCode} ${error.code} - ${duration} ms`,
+        `${error.constructor.name} - Outgoing request: ${error.code} ${response?.data.statusCode} - ${duration} ms`,
         AxiosService.name,
       );
       this.consoleLogger.error(
-        `Content length: ${error.response.headers['content-length']}`,
-        'Request details',
+        'Request options',
         options,
-        'Request response details',
-        error.response.data,
+        `Response content length: ${response?.headers['content-length']}`,
+        'Response data',
+        response?.data,
         AxiosService.name,
       );
 
