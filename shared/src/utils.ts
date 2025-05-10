@@ -7,6 +7,10 @@ export async function errorRethrower<T>(
   try {
     return await promise;
   } catch (error) {
-    throw new errorClass(error.message);
+    if (error instanceof FlipError) {
+      throw error;
+    } else {
+      throw new errorClass(error.message);
+    }
   }
 }
