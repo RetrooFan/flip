@@ -1,14 +1,14 @@
 module.exports = {
-  env: {
-    es2021: true,
-    node: true,
+  parserOptions: {
+    project: './tsconfig.eslint.json',
+    sourceType: 'module',
+    ecmaVersion: 2021,
   },
   plugins: ['@typescript-eslint/eslint-plugin'],
   extends: ['plugin:@typescript-eslint/recommended', 'prettier', 'plugin:prettier/recommended'],
-  parserOptions: {
-    ecmaVersion: 2021,
-    sourceType: 'module',
-    project: './tsconfig.eslint.json',
+  env: {
+    es2021: true,
+    node: true,
   },
   rules: {
     'import/prefer-default-export': 'off',
