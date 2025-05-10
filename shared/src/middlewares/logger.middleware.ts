@@ -10,6 +10,7 @@ export function logger(req: Request, res: Response, next: NextFunction): void {
   };
 
   console.log('Request', request);
+  console.log();
 
   next();
 }
