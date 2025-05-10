@@ -22,16 +22,23 @@ export class AxiosService {
       const duration = Date.now() - startTime;
 
       this.consoleLogger.log(`${result.status} ${result.statusText} - ${duration} ms`, AxiosService.name);
-      this.consoleLogger.log(options, AxiosService.name);
+      this.consoleLogger.log('Request details', options, AxiosService.name);
 
       return result.data;
     } catch (error) {
       const duration = Date.now() - startTime;
 
-      this.consoleLogger.error(error.constructor.name, AxiosService.name);
-      this.consoleLogger.error(`${error.response.data.statusCode} ${error.code} - ${duration} ms`, AxiosService.name);
-      this.consoleLogger.error(options, AxiosService.name);
-      this.consoleLogger.error(error.response.data, AxiosService.name);
+      this.consoleLogger.error(
+        `${error.constructor.name}: Outgoing request ${error.response.data.statusCode} ${error.code} - ${duration} ms`,
+        AxiosService.name,
+      );
+      this.consoleLogger.error(
+        'Request details',
+        options,
+        'Request response data',
+        error.response.data,
+        AxiosService.name,
+      );
 
       throw new FlipKnownError({ message: error.message, original: error });
     }
