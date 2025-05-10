@@ -20,8 +20,11 @@ export class DataFacilitatorService {
   public async getOrders(getOrdersQueryDto: GetOrdersQueryDto): Promise<Order[]> {
     const skipItemsNumber = getOrdersQueryDto._limit * (getOrdersQueryDto._page - 1);
 
-    return await this.orderModel.find().skip(skipItemsNumber).limit(getOrdersQueryDto._limit).sort({ date: 1 });
-
+    return await this.orderModel
+      .find({ date: { $lte: this.date } })
+      .skip(skipItemsNumber)
+      .limit(getOrdersQueryDto._limit)
+      .sort({ date: 1 });
   }
 
   public async setDateTime(setDateTimeQueryDto: SetDateTimeQueryDto): Promise<string> {
