@@ -3,6 +3,8 @@ import { Response } from 'express';
 import { DataFetcherQueryDto } from './dtos/dataFetcherQuery.dto';
 import { Order } from '../../../../../shared/src/entities/order.entity';
 import { DataFetcherService } from './dataFetcher.service';
+import { S0DataProviderError } from '../../errors/s0DataProvider.error';
+import { errorRethrower } from '../../../../../shared/src/utils';
 
 @Controller()
 export class DataFetcherController {
@@ -18,21 +20,21 @@ export class DataFetcherController {
 
     response.status(HttpStatus.OK).send('Data loading started!');
 
-    await this.dataFetcherService.loadData(dataFetcherQueryDto);
+    await errorRethrower(this.dataFetcherService.loadData(dataFetcherQueryDto), S0DataProviderError);
   }
 
   @Get('stop')
   private async stopLoading(): Promise<string> {
-    return await this.dataFetcherService.stopLoading();
+    return await errorRethrower(this.dataFetcherService.stopLoading(), S0DataProviderError);
   }
 
   @Get('abort')
   private async abortLoading(): Promise<string> {
-    return await this.dataFetcherService.abortLoading();
+    return await errorRethrower(this.dataFetcherService.abortLoading(), S0DataProviderError);
   }
 
   @Get('read')
   private async read(): Promise<Order[]> {
-    return await this.dataFetcherService.read();
+    return await errorRethrower(this.dataFetcherService.read(), S0DataProviderError);
   }
 }
