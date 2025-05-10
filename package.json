@@ -3,10 +3,10 @@
   "scripts": {
     "lint:s0DataProvider": "eslint 'services/s0DataProvider'",
     "lint:shared": "eslint 'shared'",
-    "lint:all": "eslint './'",
+    "lint:all": "eslint '**/*.ts'",
     "format:s0DataProvider": "eslint 'services/s0DataProvider' --fix",
     "format:shared": "eslint 'shared' --fix",
-    "format:all": "eslint './' --fix",
+    "format:all": "eslint '**/*.ts' --fix",
     "jest:s0DataProvider": "jest services/s0DataProvider",
     "jest:all": "jest services",
     "jest:all:debug": "node --inspect-brk=0.0.0.0 node_modules/.bin/jest --runInBand services"
