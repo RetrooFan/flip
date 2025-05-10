@@ -5,7 +5,7 @@ import { Model } from 'mongoose';
 import { AmountOfOrders, AmountOfOrdersDocument } from '../../../../../shared/src/entities/amountOfOrders.entity';
 import { MetricsOfProduct, MetricsOfProductDocument } from '../../../../../shared/src/entities/metricsOfProduct.entity';
 import { Order } from '../../../../../shared/src/entities/order.entity';
-import { OrderCountDate, OrderCountDateDocument } from '../../../../../shared/src/entities/orderCountDate.entity';
+import { DateOfOrderCounts, DateOfOrderCountsDocument } from '../../../../../shared/src/entities/orderCountDate.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
 import { AxiosService } from '../../../../../shared/src/modules/axios/axios.service';
 import { CronService } from '../../../../../shared/src/modules/cron/cron.service';
@@ -23,8 +23,8 @@ export class DataAnalyzerService {
     @InjectModel(MetricsOfProduct.name, DbConnection.DataAnalyzer)
     private readonly metricsOfProductModel: Model<MetricsOfProductDocument>,
     private readonly consoleLogger: ConsoleLogger,
-    @InjectModel(OrderCountDate.name, DbConnection.DataAnalyzer)
-    private readonly orderCountDateModel: Model<OrderCountDateDocument>,
+    @InjectModel(DateOfOrderCounts.name, DbConnection.DataAnalyzer)
+    private readonly dateOfOrderCountsModel: Model<DateOfOrderCountsDocument>,
   ) {
     this.addCronJobs();
   }
@@ -51,15 +51,15 @@ export class DataAnalyzerService {
     const counter = currentValue % limit;
 
     for (let i = counter; i < data.length; i++) {
-      const orderCountDate = await this.orderCountDateModel.findOne<OrderCountDate>();
+      const dateOfOrderCounts = await this.dateOfOrderCountsModel.findOne<DateOfOrderCounts>();
       const date = new Date(data[i].date);
       const value = date.toISOString().split('T')[0];
 
-      if (!orderCountDate) {
-        new this.orderCountDateModel({ value }).save();
-      } else if (orderCountDate.value !== value) {
+      if (!dateOfOrderCounts) {
+        new this.dateOfOrderCountsModel({ value }).save();
+      } else if (dateOfOrderCounts.value !== value) {
         await this.orderCountReset(value);
-        new this.orderCountDateModel({ value }).save();
+        new this.dateOfOrderCountsModel({ value }).save();
       }
 
       for (const item of data[i].items) {

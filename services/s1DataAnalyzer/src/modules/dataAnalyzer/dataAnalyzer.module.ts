@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AmountOfOrders, amountOfOrdersSchema } from '../../../../../shared/src/entities/amountOfOrders.entity';
 import { MetricsOfProduct, MetricsOfProductSchema } from '../../../../../shared/src/entities/metricsOfProduct.entity';
-import { OrderCountDate, orderCountDateSchema } from '../../../../../shared/src/entities/orderCountDate.entity';
+import { DateOfOrderCounts, dateOfOrderCountsSchema } from '../../../../../shared/src/entities/orderCountDate.entity';
 import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
 import { AxiosModule } from '../../../../../shared/src/modules/axios/axios.module';
 import { CronModule } from '../../../../../shared/src/modules/cron/cron.module';
@@ -30,8 +30,8 @@ import { DataAnalyzerService } from './dataAnalyzer.service';
           schema: MetricsOfProductSchema,
         },
         {
-          name: OrderCountDate.name,
-          schema: orderCountDateSchema,
+          name: DateOfOrderCounts.name,
+          schema: dateOfOrderCountsSchema,
         },
       ],
       DbConnection.DataAnalyzer,
