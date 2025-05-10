@@ -11,12 +11,12 @@ import { ExperimentalService } from './experimental.service';
       imports: [RedisModule],
       inject: [RedisService],
       useFactory: (redisService: RedisService) => {
-        const rawRedisUrl = redisService.getRawRedisUrl();
-        const redisUrl = parse(rawRedisUrl);
+        const redisUrl = redisService.getRedisUrl();
+        const redisUrlParsed = parse(redisUrl);
         const redis = {
-          port: Number(redisUrl.port),
-          host: redisUrl.hostname,
-          password: redisUrl.auth.split(':')[1],
+          port: Number(redisUrlParsed.port),
+          host: redisUrlParsed.hostname,
+          password: redisUrlParsed.auth.split(':')[1],
           tls: {
             rejectUnauthorized: false,
           },

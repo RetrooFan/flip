@@ -4,14 +4,14 @@ import { BullModuleOptions } from '@nestjs/bull';
 
 @Injectable()
 export class RedisService {
-  private readonly rawRedisUrl: string;
+  private readonly redisUrl: string;
   private readonly redisQueueClient: Redis;
   private readonly redisQueueSubscriber: Redis;
 
   constructor() {
-    this.rawRedisUrl = `${process.env.REDIS_URL}-${process.env.NODE_ENV}-redis:${process.env.REDIS_PORT}`;
-    this.redisQueueClient = new Redis(this.rawRedisUrl, getRedisConnectionConfig());
-    this.redisQueueSubscriber = new Redis(this.rawRedisUrl, getRedisConnectionConfig());
+    this.redisUrl = `${process.env.REDIS_URL}-${process.env.NODE_ENV}-redis:${process.env.REDIS_PORT}`;
+    this.redisQueueClient = new Redis(this.redisUrl, getRedisConnectionConfig());
+    this.redisQueueSubscriber = new Redis(this.redisUrl, getRedisConnectionConfig());
   }
 
   public redisRegisterQueueFactory(): BullModuleOptions {
@@ -24,8 +24,8 @@ export class RedisService {
     };
   }
 
-  public getRawRedisUrl(): string {
-    return this.rawRedisUrl;
+  public getRedisUrl(): string {
+    return this.redisUrl;
   }
 
   private getRedisQueue(type: string): Redis {
@@ -35,7 +35,7 @@ export class RedisService {
       case 'subscriber':
         return this.redisQueueSubscriber;
       default:
-        return new Redis(this.rawRedisUrl, getRedisConnectionConfig());
+        return new Redis(this.redisUrl, getRedisConnectionConfig());
     }
   }
 }
