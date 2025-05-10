@@ -1,6 +1,6 @@
 {
   "name": "s0-data-provider",
-  "main": "dist/services/s0DataProvider/src/index.js",
+  "main": "dist/services/s0DataProvider/src/main.js",
   "scripts": {
     "build:clean": "rimraf dist",
     "prebuild": "npm run build:clean",

@@ -4,5 +4,5 @@
     "shared/src/"
   ],
   "ext": "ts",
-  "exec": "node -r ts-node/register --inspect=0.0.0.0 services/*/src/index.ts"
+  "exec": "node -r ts-node/register --inspect=0.0.0.0 services/*/src/main.ts"
 }
