@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CronService } from '../cron/cron.service';
+import { CronService } from '../../../../../shared/src/modules/cron/cron.service';
 
 @Injectable()
 export class DataAnalyzerService {
