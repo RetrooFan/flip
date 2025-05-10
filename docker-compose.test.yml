@@ -20,7 +20,8 @@ services:
     command: bash -c "
       npm i --only=prod &&
       npm run lint:${SERVICE} &&
-      npm run jest:${SERVICE}"
+      npm run jest:${SERVICE} &&
+      npm run jest:${SERVICE}:e2e"
 
 volumes:
   node:
