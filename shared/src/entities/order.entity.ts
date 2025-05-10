@@ -5,7 +5,7 @@ import { Item } from '../types/item.type';
 
 export type OrderDocument = Order & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Order {
   @Prop({ required: true, alias: 'id' })
   _id: string;
