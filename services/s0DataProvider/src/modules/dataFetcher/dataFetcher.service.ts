@@ -4,8 +4,8 @@ import { AxiosStatic } from 'axios';
 import { Model } from 'mongoose';
 import DataFetcherQueryDto from 'services/s0DataProvider/src/modules/dataFetcher/dtos/dataFetcherQuery.dto';
 import { Order, OrderDocument } from '../../../../../shared/src/entities/order.entity';
-import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
-import { AxiosService } from '../../../../../shared/src/modules/axios/axios.service';
+import DbConnection from '../../../../../shared/src/enums/dbConnection.enum';
+import AxiosService from '../../../../../shared/src/modules/axios/axios.service';
 
 @Injectable()
 export default class DataFetcherService {

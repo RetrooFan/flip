@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import axios, { AxiosStatic } from 'axios';
 
 @Injectable()
-export class AxiosService {
+export default class AxiosService {
   private readonly axiosInstance: AxiosStatic;
 
   constructor() {

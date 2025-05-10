@@ -1,8 +1,8 @@
 import { ConsoleLogger, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Order, orderSchema } from '../../../../../shared/src/entities/order.entity';
-import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
-import { AxiosModule } from '../../../../../shared/src/modules/axios/axios.module';
+import DbConnection from '../../../../../shared/src/enums/dbConnection.enum';
+import AxiosModule from '../../../../../shared/src/modules/axios/axios.module';
 import DataFetcherController from './dataFetcher.controller';
 import DataFetcherService from './dataFetcher.service';
 

@@ -1,6 +1,6 @@
-import { Product } from './product.type';
+import Product from './product.type';
 
-export class Item {
+export default class Item {
   product: Product;
   quantity: number;
 }

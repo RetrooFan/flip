@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import DataFacilitatorQueryDto from './dtos/dataFacilitatorQuery.dto';
 import { Order, OrderDocument } from '../../../../../shared/src/entities/order.entity';
-import { DbConnection } from '../../../../../shared/src/enums/dbConnection.enum';
+import DbConnection from '../../../../../shared/src/enums/dbConnection.enum';
 
 @Injectable()
 export default class DataFacilitatorService {
