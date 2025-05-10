@@ -1,26 +1,26 @@
 import { ConsoleLogger, Injectable, Optional } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import axios, { AxiosRequestConfig, AxiosStatic } from 'axios';
+import axios, { Axios, AxiosRequestConfig } from 'axios';
 import { FlipKnownError } from '../../errors/flipKnown.error';
 
 @Injectable()
 export class AxiosService {
-  private axiosInstance: AxiosStatic;
+  private axios: Axios;
 
   constructor(
     private readonly consoleLogger: ConsoleLogger,
     private readonly configService: ConfigService,
-    @Optional() axiosInstance: AxiosStatic,
+    @Optional() axiosInstance: Axios,
   ) {
     if (axiosInstance && this.configService.get<string>('nodeEnv') === 'test') {
-      this.axiosInstance = axiosInstance;
+      this.axios = axiosInstance;
     } else {
-      this.axiosInstance = axios;
+      this.axios = axios;
     }
   }
 
-  getAxios(): AxiosStatic {
-    return this.axiosInstance;
+  getAxios(): Axios {
+    return this.axios;
   }
 
   public async request<T = unknown>(options: AxiosRequestConfig): Promise<T> {
